@@ -1,0 +1,2223 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head><meta charset="UTF-8">
+
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="/xmlrpc.php">
+<title>Guide to the ORE XML Trade Data Format – Open Source Risk Engine – Open Source Risk Analytics</title>
+<meta name="robots" content="max-image-preview:large">
+<link rel="dns-prefetch" href="//www.google.com">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="alternate" type="application/rss+xml" title="Open Source Risk Engine - Open Source Risk Analytics » Feed" href="/feed/">
+<link rel="alternate" type="application/rss+xml" title="Open Source Risk Engine - Open Source Risk Analytics » Comments Feed" href="/comments/feed/">
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=%2Fguide-to-the-ore-xml-trade-data-format-2%2F">
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=%2Fguide-to-the-ore-xml-trade-data-format-2%2F&amp;format=xml">
+			<link rel="icon" type="image/png" href="/wp-content/uploads/2016/10/favicon.png" sizes="16x16">
+							<link rel="icon" type="image/png" href="/wp-content/uploads/2016/10/favicon.png" sizes="32x32">
+																																					<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css" type="text/css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css" type="text/css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}.has-text-align-center{text-align:center}.has-text-align-left{text-align:left}.has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<style id="global-styles-inline-css" type="text/css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel="stylesheet" id="bbp-default-css" href="/wp-content/plugins/bbpress/templates/default/css/bbpress.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="rhythm-fonts-css" href="https://fonts.googleapis.com/css?family=Dosis%3A300%2C400%2C700%7COpen+Sans%3A400italic%2C700italic%2C400%2C300%2C700&amp;subset=latin" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-css" href="/wp-content/themes/rhythm/css/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="rhythm-main-css" href="/wp-content/themes/rhythm/css/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="rhythm-responsive-css" href="/wp-content/themes/rhythm/css/style-responsive.css" type="text/css" media="all">
+<link rel="stylesheet" id="animate-css" href="/wp-content/themes/rhythm/css/animate.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="vertical-rhythm-css" href="/wp-content/themes/rhythm/css/vertical-rhythm.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="owl-carousel-css" href="/wp-content/themes/rhythm/css/owl.carousel.css" type="text/css" media="all">
+<link rel="stylesheet" id="magnific-popup-css" href="/wp-content/themes/rhythm/css/magnific-popup.css" type="text/css" media="all">
+<link rel="stylesheet" id="fontawesome-css" href="/wp-content/themes/rhythm/css/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="et-line-css" href="/wp-content/themes/rhythm/css/et-line.css" type="text/css" media="all">
+<link rel="stylesheet" id="rhythm-style-css" href="/wp-content/themes/rhythm/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="redux-google-fonts-ts_theme_options-css" href="https://fonts.googleapis.com/css?family=Raleway%3A700%7COpen+Sans%3A300&amp;subset=latin&amp;ver=6.9.4" type="text/css" media="all">
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<link rel="https://api.w.org/" href="/wp-json/"><link rel="alternate" title="JSON" type="application/json" href="/wp-json/wp/v2/pages/6377"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd">
+<meta name="generator" content="WordPress 6.9.4">
+<link rel="canonical" href="/guide-to-the-ore-xml-trade-data-format-2/">
+<link rel="shortlink" href="/?p=6377">
+    
+    <script type="text/javascript">
+        var ajaxurl = '/wp-admin/admin-ajax.php';
+    </script>
+<!--[if lt IE 10]><script type="text/javascript" src="/wp-content/themes/rhythm/js/placeholder.js"></script><![endif]--><meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<meta name="generator" content="Powered by Slider Revolution 6.7.28 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+<script>function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+<style type="text/css" title="dynamic-css" class="options-output">.main-nav .inner-nav ul > li > a, .main-nav.dark .inner-nav ul > li > a{font-family:Raleway;font-weight:700;font-style:normal;}.title-wrapper .hs-line-11, .title-wrapper .hs-line-4, .mod-breadcrumbs, .mod-breadcrumbs a, .mod-breadcrumbs span{font-family:"Open Sans";font-weight:300;font-style:normal;}</style>	<style type="text/css">
+			</style>
+		<noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript><link rel="stylesheet" id="rs-plugin-settings-css" href="/wp-content/plugins/revslider/sr6/assets/css/rs6.css" type="text/css" media="all">
+<style id="rs-plugin-settings-inline-css" type="text/css">
+#rs-demo-id {}
+/*# sourceURL=rs-plugin-settings-inline-css */
+</style>
+
+</head>
+
+<body class="wp-singular page-template-default page page-id-6377 wp-theme-rhythm appear-animate wpb-js-composer js-comp-ver-6.9.0 vc_responsive">
+	
+	<!-- Page Loader -->        
+	<div class="page-loader ">
+				<div class="loader">Loading...</div>
+	</div>
+	<!-- End Page Loader -->
+
+	
+		
+	<!-- Page Wrap -->
+	<div class="page" id="top">
+		
+		
+	<!-- Navigation panel -->
+	<nav class="main-nav stick-fixed transparent">
+		<div class="full-wrapper relative clearfix">
+			<div class="nav-logo-wrap local-scroll">
+					<a class="logo" href="/" title="Open Source Risk Engine - Open Source Risk Analytics"> 
+		<img src="/wp-content/uploads/2015/03/logo_trans-1.png" width="200" height="80" alt="Open Source Risk Engine - Open Source Risk Analytics">	</a>
+				</div>
+			<div class="mobile-nav">
+				<i class="fa fa-bars"></i>
+			</div>
+			<!-- Main Menu -->
+			<div class="inner-nav desktop-nav">
+				<ul id="primary-nav" class="clearlist scroll-nav local-scroll"><li id="menu-item-3433" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-3433"><a href="/" class=" ">Home</a></li>
+<li id="menu-item-3683" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3683"><a href="https://github.com/OpenSourceRisk" class=" ">View On Github</a></li>
+<li id="menu-item-3658" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3658"><a href="/documentation/" class=" ">Documentation</a></li>
+<li id="menu-item-3595" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3595"><a href="/faqs/" class=" ">FAQs</a></li>
+<li id="menu-item-3659" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3659"><a href="/roadmap/" class=" ">Roadmap</a></li>
+<li id="menu-item-7207" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7207"><a href="/learning/" class=" ">Learning</a></li>
+<li id="menu-item-3673" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3673"><a href="/contributions/" class=" ">Contributions</a></li>
+<li id="menu-item-7243" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7243"><a target="_blank" href="https://github.com/OpenSourceRisk/Engine/discussions" class=" ">Discussion</a></li>
+<li id="menu-item-3661" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3661"><a href="/license/" class=" ">License</a></li>
+</ul>				
+				<ul class="clearlist modules">
+											 
+											
+											
+											
+									</ul>
+				
+			</div>
+			<!-- End Main Menu -->
+		</div>
+	</nav>
+	<!-- End Navigation panel -->
+
+	
+
+	<!-- Title Wrapper Section -->
+	<section class="title-wrapper page-section no-effect bg-dark-alfa-50" style="background-image: url(/wp-content/uploads/2016/07/hero_bg.jpg);">
+		<div class="relative align-left  container">
+						<div class="row">
+				<div class="col-md-8 align-left">
+					
+									</div>
+				<div class="col-md-4 mt-30">
+						<!-- Breadcrumbs -->
+	<div class="mod-breadcrumbs font-alt align-right">
+		<a href="/">Home</a> / <span>Guide to the ORE XML Trade Data Format</span>	</div>
+	<!-- End Breadcrumbs -->
+				</div>
+			</div>
+					</div>
+	</section>
+	<!-- End Title Wrapper Section -->
+
+<!-- Page Section -->
+<section class="main-section page-section no-margin">
+	<div class="container relative">
+							
+<article id="post-6377" class="post-6377 page type-page status-publish hentry">
+	<div class="text">
+		<h1>Guide to the ORE XML Trade Data Format</h1>
+<h3>Content</h3>
+<ol>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#trade">Trade Data</a>
+<ol>
+<li><a href="#envelope">Envelope</a></li>
+<li><a href="#tradespecific">Trade Specific Data</a>
+<ol>
+<li><a href="#swap">Swap</a></li>
+<li><a href="#zero">Zero Coupon Swap</a></li>
+<li><a href="#cap">Cap/Floor</a></li>
+<li><a href="#fra">Forward Rate Agreement</a></li>
+<li><a href="#swaption">Swaption</a></li>
+<li><a href="#fxforward">FX Forward</a></li>
+<li><a href="#fxswap">FX Swap</a></li>
+<li><a href="#fxoption">FX Option</a></li>
+<li><a href="#equityop">Equity Option</a></li>
+<li><a href="#equityfo">Equity Forward</a></li>
+<li><a href="#equityswap">Equity Swap</a></li>
+<li><a href="#cpiswap">CPI Swap</a></li>
+<li><a href="#yearonyear">Year on Year Inflation Swap</a></li>
+<li><a href="#bond">Bond</a></li>
+<li><a href="#creditdefault">Credit Default Swap</a></li>
+<li><a href="#comoption">Commodity Option</a></li>
+<li><a href="#comforward">Commodity Forward</a></li>
+</ol>
+</li>
+<li><a href="#tradecomponent">Trade Components</a>
+<ol>
+<li><a href="#optiondata">Option Data</a></li>
+<li><a href="#legdata">Leg Data and Notionals</a></li>
+<li><a href="#scheduledata">Schedule Data (Rules and Dates)</a></li>
+<li><a href="#fixedleg">Fixed Leg Data and Rates</a></li>
+<li><a href="#floatingleg">Floating Leg Data, Spreads, Gearings, Caps and Floors</a></li>
+<li><a href="#legdataamortisation">Leg Data with Amortisation Structures</a></li>
+<li><a href="#cmslegdata">CMS Leg Data</a></li>
+<li><a href="#cmsspread">CMS Spread Leg Data</a></li>
+<li><a href="#digitalcmsspread">Digital CMS Spread Leg Data</a></li>
+<li><a href="#equitylegdata">Equity Leg Data</a></li>
+<li><a href="#cpileg">CPI Leg Data</a></li>
+<li><a href="#yylegdata">YY Leg Data</a></li>
+<li><a href="#zerocouponsfixed">ZeroCouponFixed Leg Data</a></li>
+</ol>
+</li>
+<li><a href="#allowable">Allowable Values for Standard Trade Data</a></li>
+</ol>
+</li>
+</ol>
+<h3><a id="intro"></a>1. Introduction</h3>
+<p>This guide describes ORE XML, i.e. the XML representation of trades in ORE.</p>
+<h3><a id="trade"></a>2. Trade Data</h3>
+<p>The trades that make up a portfolio are specified in an XML file where the portfolio data is specified in a hierarchy of nodes and sub-nodes. The nodes containing individual trade data are referred to as elements or XML elements. These are generally the lowest level nodes.</p>
+<p>The top level portfolio node is delimited by an opening <em>&lt;portofolio&gt;</em> and a closing <em>&lt;/portofolio&gt;</em> tag. Within the portfolio node, each trade is defined by a starting &lt;Trade id=”[Tradeid]”&gt; and a closing &lt;/Trade&gt; tag. Further, the trade type is set by the TradeType XML element. Each trade has an Envelope node that includes the same XML elements for all trade types (Id, Type, Counterparty, Rating, NettingSetId) plus the Additional fields node, and after that, a node containing trade specific data.</p>
+<p>An example of a portfolio.xml file with one Swap trade including the full envelope node is shown in Listing 1.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;Portfolio&gt;<br>
+<span class="m15">&lt;Tradeid=”<span style="color: #000000;">Swap#1</span>“&gt;</span><br>
+<span class="m30">&lt;TradeType&gt;<span style="color: #000000;">Swap</span>&lt;/TradeType&gt;</span><br>
+<span class="m30">&lt;Envelope&gt;<br>
+<span class="m45">&lt;CounterParty&gt;<span style="color: #000000;">Counterparty#1</span>&lt;/CounterParty&gt;</span><br>
+<span class="m45">&lt;NettingSetId&gt;<span style="color: #000000;">NettingSet#2</span>&lt;/NettingSetId&gt;</span><br>
+<span class="m45">&lt;PortfolioIds&gt;</span><br>
+<span class="m60">&lt;PortoliodId&gt;<span style="color: #000000;">PF#1</span>&lt;/PortfolioId&gt;</span><br>
+<span class="m60">&lt;PortoliodId&gt;<span style="color: #000000;">PF#2</span>&lt;/PortfolioId&gt;</span><br>
+<span class="m45">&lt;/PortfolioIds&gt;</span><br>
+<span class="m45">&lt;AdditionalFields&gt;</span><br>
+<span class="m60">&lt;Sector&gt;<span style="color: #000000;">SectorA</span>&lt;/Sector&gt;</span><br>
+<span class="m60">&lt;Book&gt;<span style="color: #000000;">BookB</span>&lt;/Book&gt;</span><br>
+<span class="m60">&lt;Rating&gt;<span style="color: #000000;">A1</span>&lt;/Rating&gt;</span><br>
+<span class="m45">&lt;/AdditionalFields&gt;</span><br>
+<span class="m30">&lt;/Envelope&gt;</span><br>
+<span class="m30">&lt;SwapData&gt;</span><br>
+<span class="m60"><span style="color: #000000;">…</span></span><br>
+<span class="m60"><span style="color: #000000;">[Trade specific data for a Swap]</span></span><br>
+<span class="m60"><span style="color: #000000;">…</span></span><br>
+<span class="m30">&lt;/SwapData&gt;</span><br>
+<span class="m15">&lt;/Trade&gt;</span><br>
+&lt;/Portfolio&gt;</span></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 1: Portfolio</em></p>
+<p>A description of all portfolio data, i.e. of each node and XML element in the portfolio file, with examples and allowable values follows below. There are two XML elements directly under the top level Portfolio node:</p>
+<ul>
+<li>Trade id: The first element of each trade is the Trade id and it is used to identify trades within a portfolio. Trade ids should be unique within a portfolio. The Trade id element is entered as an attribute to the XML element &lt;Trade&gt;, such as &lt;Trade id=”ExampleTrade”&gt; in the beginning closed by &lt;/Trade&gt; at the end of the trade data.<br>
+Allowable values: Any alphanumeric string. The underscore ( ) sign may be used as well.</li>
+<li>TradeType: ORE currently supports 14 trade types.<br>
+Allowable values: <em>ForwardRateAgreement, Swap, CapFloor, Swaption, FxForward, FxSwap, FxOption, EquityForward, EquityOption, EquitySwap, CommodityFor- ward, CommodityOption, CreditDefaultSwap, Bond</em></li>
+</ul>
+<h3><a id="envelope"></a>2.1 Envelope</h3>
+<p>The envelope node contains basic identifying details of a trade (Id, Type, Counterparty, NettingSetId), a PortfolioIds node containing a list of portfolio assignments, plus an AdditionalFields node where custom elements can be added for informational pur- poses such as Book or Sector. Beside the custom elements within the AdditionalFields node, the envelope contains the same elements for all Trade types. The Id, Type, Counterparty and NettingSetId elements must have non-blank entries for ORE to run. The meanings and allowable values of the various elements in the Envelope node follow below.</p>
+<ul>
+<li>Id: The Id element in the envelope is used to identify trades within a portfolio. It should be set to identical values as the Trade id=” ” element.<br>
+Allowable values: Any alphanumeric string. The underscore ( ) sign may be used as well.</li>
+<li>Counterparty: Specifies the name of the counterparty of the trade. It is used to show exposure analytics by counterparty.<br>
+Allowable values: Any alphanumeric string. Underscores ( ) and blank spaces may be used as well.</li>
+<li>NettingSetId [Optional]: The NettingSetId element specifies the identifier for a netting set. If a NettingSetId is specified, the trade is eligible for close-out netting under the terms of an associated ISDA agreement. The specified NettingSetId must be a unique identifier for the netting set. If left blank or omitted the trade will not belong to any netting set, and thus not be eligible for netting.<br>
+Allowable values: Any alphanumeric string. Underscores ( ) and blank spaces may be used as well.</li>
+<li>PortfolioIds [Optional]: The PortfolioIds node allows the assignment of a given trade to several portfolios, each enclosed in its own pair of tags &lt;PortfolioId&gt; and &lt;/PortfolioId&gt;. Note that ORE does not assume a hierarchical organisation of such portfolios. If present, the portfolio IDs will be used in the generation of some ORE reports such as the VaR report which provides breakdown by any portfolio id that occurs in the trades’ envelopes.<br>
+Allowable values for each PortfolioId: Any string.</li>
+<li>AdditionalFields [Optional]: The AdditionalFields node allows the insertion of additional trade information using custom XML elements. For example, el- ements such as Sector, Desk or Folder can be used. The elements within the AdditionalFields node are used for informational purposes only, and do not affect any analytics in ORE.<br>
+Allowable values: Any custom element.</li>
+</ul>
+<h3><a id="tradespecific"></a>2.2 Trade Specific Data</h3>
+<p>After the envelope node, trade-specific data for each trade type supported by ORE is included. Each trade type has its own trade data container which is defined by an XML node containing a trade-specific configuration of individual XML tags – called elements – and trade components. The trade components are defined by XML sub-nodes that can be used within multiple trade data containers, i.e. by multiple trade types.</p>
+<p>Details of trade-specific data for all trade types follow below.</p>
+<h3><a id="swap"></a>2.2.1 Swap</h3>
+<p>The SwapData node is the trade data container for the Swap trade type. A Swap must have at least one leg, and can have an unlimited number of legs. Each leg is represented by a LegData trade component sub-node, described in <a href="#legdata">section 2.3.2</a>. An example structure of a two-legged SwapData node is shown in Listing 2.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;SwapData&gt;<br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+&lt;/SwapData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 2: Swap data</em></p>
+<h3><a id="zero"></a>2.2.2 Zero Coupon Swap</h3>
+<p>A Zero Coupon swap is set up as a swap, with one leg of type ZeroCouponFixed. Listing 3 shows an example. The ZeroCouponFixed leg contains an additional ZeroCouponFixedLegData block. See <a href="#zerocouponsfixed">2.3.13</a> for details on the ZeroCouponFixed leg specification</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;SwapData&gt;<br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<em><span style="color: #000000;">Floating</span></em>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<em><span style="color: #000000;">true</span></em>&lt;/Payer&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<em><span style="color: #000000;">ZeroCouponFixed</span></em>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;false&lt;/Payer&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m30">&lt;ZeroCouponFixedLegData&gt;</span><br>
+<span class="m45">&lt;Rates&gt;</span><br>
+<span class="m60">&lt;Rate&gt;<span style="color: #000000;">0.02</span>&lt;/Rate&gt;</span><br>
+<span class="m45">&lt;/Rates&gt;</span><br>
+<span class="m45">&lt;Compounding&gt;<span style="color: #000000;">Simple</span>&lt;/Compounding&gt;</span><br>
+<span class="m30">&lt;/ZeroCouponFixedLegData&gt;</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+&lt;/SwapData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 3: Zero Coupon Swap Data</em></p>
+<h3><a id="cap"></a>2.2.3 Cap/Floor</h3>
+<p>The CapFloorData node is the trade data container for trade type CapFloors. It’s a cap, floor or collar (i.e. a portfolio of a long cap and a short floor for a long position in the collar) on a series of Ibor or CMS rates. The CapFloorData node contains a LongShort sub-node which indicates whether the cap (floor, collar) is long or short, and a LegData sub-node where the LegType element must be set to Floating or CMS, plus elements for the Cap and Floor rates. An example structure with Cap rates is shown in in Listing 4.<br>
+A CapFloorData node must have either Caps or Floors elements, or both.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;CapFloorData&gt;<br>
+<span class="m15">&lt;LongShort&gt;<span style="color: #000000;">Long</span>&lt;/LongShort&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<span style="color: #000000;">Floating</span>&lt;/LegType&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+<span class="m15">&lt;Caps&gt;</span><br>
+<span class="m30">&lt;Rate&gt;<span style="color: #000000;">0.05</span>&lt;/Rate&gt;</span><br>
+<span class="m15">&lt;/Caps&gt;</span><br>
+&lt;/CapFloorData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 4: Cap/Floor data</em></p>
+<p>The meanings and allowable values of the elements in the CapFloorData node follow below.</p>
+<ul>
+<li>LongShort: This node defines the position in the cap (floor, collar) and can take values Long or Short</li>
+<li>LegData: This is a trade component sub-node outlined in <a href="#legdata">section 2.3.2</a>. Exactly one LegData node is allowed and the LegType element must be set to <em>Floating or CMS</em>.</li>
+<li>Caps: This node has child elements of type Cap capping the floating leg. The first rate value corresponds to the first coupon, the second rate value corresponds to the second coupon, etc. If the number of coupons exceeds the number of rate values, the rate will be kept flat at the value of last entered rate for the remaining coupons. For a fixed cap rate over all coupons, one single rate value is sufficient. The number of entered rate values cannot exceed the number of coupons.<br>
+Allowable values for each Cap element: Any real number. The rate is expressed in decimal form, eg 0.05 is a rate of 5%</li>
+<li>Floors: This node has child elements of type Floor flooring the floating leg. The first rate value corresponds to the first coupon, the second rate value corresponds to the second coupon, etc. If the number of coupons exceeds the number of rate values, the rate will be kept flat at the value of last entered rate for the remaining coupons. For a fixed floor rate over all coupons, one single rate value is sufficient. The number of entered rate values cannot exceed the number of coupons.<br>
+Allowable values for each Floor element: Any real number. The rate is expressed in decimal form, eg 0.05 is a rate of 5%</li>
+</ul>
+<h3><a id="fra"></a>2.2.4 Forward Rate Agreement</h3>
+<p>A forward rate agreement is set up using a ForwardRateAgreementData block as shown in listing 5. The forward rate agreement specific elements are:</p>
+<ul>
+<li>StartDate: A FRA expires/settles on the startDate.<br>
+Allowable values: See Date in <a href="#table4">Table 4</a>.</li>
+<li>EndDate: EndDate is the date when the forward loan or deposit ends. It follows that (EndDate – StartDate) is the tenor/term of the underlying loan or deposit.<br>
+Allowable values: See Date in <a href="#table4">Table 4</a>.</li>
+<li>Currency: The currency of the FRA notional.<br>
+Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>Index: The name of the interest rate index the FRA is benchmarked against.<br>
+Allowable values: An alphanumeric string of the form CCY-INDEX-TERM. CCY, INDEX and TERM must be separated by dashes (-). CCY and INDEX must be among the supported currency and index combinations. TERM must be an integer followed by D, W, M or Y. See <a href="#table7">Table 7</a>.</li>
+<li>LongShort: Specifies whether the FRA position is long (one receives the agreed rate) or short (one pays the agreed rate).<br>
+Allowable values: Long, Short.</li>
+<li>Strike: The agreed forward interest rate.<br>
+Allowable values: Any real number. The strike rate is expressed in decimal form,<br>
+e.g. 0.05 is a rate of 5%.</li>
+<li>Notional: No accretion or amortisation, just a constant notional. Allowable values: Any positive real number.</li>
+</ul>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;ForwardRateAgreementData&gt;<br>
+<span class="m15">&lt;StartDate&gt;<span style="color: #000000;">20161028</span>&lt;/StartDate&gt;</span><br>
+<span class="m15">&lt;EndDate&gt;<span style="color: #000000;">20351028</span>&lt;/EndDate&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">EUR</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Index&gt;<span style="color: #000000;">EUR-EURIBOR-6M</span>&lt;/Index&gt;</span><br>
+<span class="m15">&lt;LongShort&gt;<span style="color: #000000;">Long</span>&lt;/LongShort&gt;</span><br>
+<span class="m15">&lt;Strike&gt;<span style="color: #000000;">0.001</span>&lt;/Strike&gt;</span><br>
+<span class="m15">&lt;Notional&gt;<span style="color: #000000;">1000000000</span>&lt;/Notional&gt;</span><br>
+&lt;/ForwardRateAgreementData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 5: Forward Rate Agreement Data</em></p>
+<h3><a id="swaption"></a>2.2.5 Swaption</h3>
+<p>The SwaptionData node is the trade data container for the Swaption trade type. The SwaptionData node has one and exactly one OptionData trade component sub-node, and at least one LegData trade component sub-node. These trade components are outlined in section <a href="#optiondata">2.3.1</a> and <a href="#legdata">section 2.3.2</a>.<br>
+Supported swaption exercise styles are European and Bermudan. European swaptions can have unlimited number of legs, with each leg represented by a LegData sub-node. Bermudan swaptions must have two legs, i.e. two LegData sub-nodes. See <a href="#table1">Table 1</a> for further details on requirements for Bermudan swaptions. Cross currency swaptions are not supported for either exercise style, i.e. the Currency element must have the same value for all LegData sub-nodes of a swaption.<br>
+The structure of an example SwaptionData node of a two-legged European swaption is shown in Listing 6.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;SwaptionData&gt;<br>
+<span class="m15">&lt;OptionData&gt;</span><br>
+<span class="m30">&lt;Style&gt;<span style="color: #000000;">European</span>&lt;/Style&gt;</span><br>
+<span class="m30">…</span><br>
+<span class="m15">&lt;/OptionData&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;Currency&gt;<span style="color: #000000;">GBP</span>&lt;/Currency&gt;</span><br>
+<span class="m30">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;Currency&gt;<span style="color: #000000;">GBP</span>&lt;/Currency&gt;</span><br>
+<span class="m30">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+&lt;/SwaptionData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 6: Swaption data</em></p>
+<p><a id="table1"></a></p>
+<h1></h1>
+<p> </p>
+<table class="full_width">
+<tbody>
+<tr>
+<td></td>
+<td><strong>A Bermudan Swaption requires:</strong></td>
+</tr>
+<tr>
+<td>OptionData</td>
+<td>One OptionData sub-node</td>
+</tr>
+<tr>
+<td>Style</td>
+<td><em>Bermudan or European</em></td>
+</tr>
+<tr>
+<td>ExerciseDates</td>
+<td><em>Bermudan </em>swaptions require at least two ExerciseDate child elements. <em>European </em>swaptions can only have one ExerciseDate child element. Note that the exercise date of a <em>European </em>swaption must be before or on the start date of the underlying swap.</td>
+</tr>
+<tr>
+<td>LegData</td>
+<td>Two LegData sub-nodes</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>The same currency for both nodes.</td>
+</tr>
+<tr>
+<td>LegType</td>
+<td><em>Bermudan </em>swaptions must have: <em>Fixed </em>on one node and <em>Floating </em>on the other. No such requirement for <em>European </em>swaptions.</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Table 1: Requirements for Bermudan Swaptions</em></p>
+<h3><a id="fxforward"></a>2.2.6 FX Forward</h3>
+<p>The FXForwardData node is the trade data container for the FX Forward trade type. The structure – including example values – of the FXForwardData node is shown in Listing 7. It contains no sub-nodes.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;FxForwardData&gt;<br>
+<span class="m15">&lt;ValueDate&gt;<span style="color: #000000;">2023-04-09</span>&lt;/ValueDate&gt;</span><br>
+<span class="m15">&lt;BoughtCurrency&gt;<span style="color: #000000;">EUR</span>&lt;/BoughtCurrency&gt;</span><br>
+<span class="m15">&lt;BoughtAmount&gt;<span style="color: #000000;">1000000</span>&lt;/BoughtAmount&gt;</span><br>
+<span class="m15">&lt;SoldCurrency&gt;<span style="color: #000000;">USD</span>&lt;/SoldCurrency&gt;</span><br>
+<span class="m15">&lt;SoldAmount&gt;<span style="color: #000000;">1500000</span>&lt;/SoldAmount&gt;</span><br>
+&lt;/FxForwardData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 7: FX Forward data</em></p>
+<p>The meanings and allowable values of the various elements in the FXForwardData node follow below. All elements are required.</p>
+<ul>
+<li>ValueDate: The value date of the FX Forward. Allowable values: See Date in <a href="#table4">Table 4</a>.</li>
+<li>BoughtCurrency: The currency to be bought on value date. Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>BoughtAmount: The amount to be bought on value date. Allowable values: Any positive real number.</li>
+<li>SoldCurrency: The currency to be sold on value date. Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>SoldAmount: The amount to be sold on value date. Allowable values: Any positive real number.</li>
+<li>Settlement [Optional]: Delivery type. Note that Non-Deliverable Forwards can be represented by <em>Cash </em>settlemen Delivery type does not impact pricing in ORE. Allowable values: <em>Cash </em>or <em>P</em><em>hysical</em>. Defaults to <em>P</em><em>hysical</em> if left blank or omitted.</li>
+</ul>
+<h3><a id="fxswap"></a>2.2.7 FX Swap</h3>
+<p>The FXSwapData node is the trade data container for the FX Swap trade type. The structure – including example values – of the FXSwapData node is shown in Listing 8. It contains no sub-nodes.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;FxSwapData&gt;<br>
+<span class="m15">&lt;NearDate&gt;<span style="color: #000000;">2018-09-01</span>&lt;/NearDate&gt;</span><br>
+<span class="m15">&lt;NearBoughtCurrency&gt;<span style="color: #000000;">EUR</span>&lt;/NearBoughtCurrency&gt;</span><br>
+<span class="m15">&lt;NearBoughtAmount&gt;<span style="color: #000000;">1000000</span>&lt;/NearBoughtAmount&gt;</span><br>
+<span class="m15">&lt;NearSoldCurrency&gt;<span style="color: #000000;">USD</span>&lt;/NearSoldCurrency&gt;</span><br>
+<span class="m15">&lt;NearSoldAmount&gt;<span style="color: #000000;">1140000</span>&lt;/NearSoldAmount&gt;</span><br>
+<span class="m30">&lt;FarDate&gt;<span style="color: #000000;">2028-09-01</span>&lt;/FarDate&gt;</span><br>
+<span class="m15">&lt;FarBoughtAmount&gt;<span style="color: #000000;">1300000</span>&lt;/FarBoughtAmount&gt;</span><br>
+<span class="m15">&lt;FarSoldAmount&gt;<span style="color: #000000;">1000000</span>&lt;/FarSoldAmount&gt;</span><br>
+&lt;/FxSwapData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 8:  FX Swap data</em></p>
+<p>The meanings and allowable values of the various elements in the FXSwapData node follow below. All elements are required.</p>
+<ul>
+<li>NearDate: The date of the initial fx exchange of the FX Swap. Allowable values: See Date in <a href="#table4">Table 4</a>.</li>
+<li>NearBoughtCurrency: The currency to be bought in the initial exchange at near date, and sold in the final exchange at far date.<br>
+Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>NearBoughtAmount: The amount to be bought on near date. Allowable values: Any positive real number.</li>
+<li>NearSoldCurrency: The currency to be sold in the initial fx exchange at near date, and bought in the final exchange at far date.<br>
+Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>NearSoldAmount: The amount to be sold on near date. Allowable values: Any positive real number.</li>
+<li>FarDate: The date of the final fx exchange of the FX Swap.Allowable values: Any date further into the future than NearDate. See Date in <a href="#table4">Table 4</a>.</li>
+<li>FarBoughtAmount: The amount to be bought on far date. Allowable values: Any positive real number.</li>
+<li>FarSoldAmount: The amount to be sold on far date. Allowable values: Any positive real number.</li>
+</ul>
+<h3><a id="fxoption"></a>2.2.8 FX Option</h3>
+<p>The FXOptionData node is the trade data container for the FX Option trade type. Vanilla FX options are supported, the exercise style must be <em>European</em>. The strike rate of an FX option is: SoldAmount / BoughtAmount. The FXOptionData node includes one and only one OptionData trade component sub-node plus elements specific to the FX Option. The structure of an example FXOptionData node for a FX Option is shown in Listing 9.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;FxOptionData&gt;<br>
+<span class="m15">&lt;OptionData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/OptionData&gt;</span><br>
+<span class="m15">&lt;BoughtCurrency&gt;<span style="color: #000000;">EUR</span>&lt;/BoughtCurrency&gt;</span><br>
+<span class="m15">&lt;BoughtAmount&gt;<span style="color: #000000;">1000000</span>&lt;/BoughtAmount&gt;</span><br>
+<span class="m15">&lt;SoldCurrency&gt;<span style="color: #000000;">USD</span>&lt;/SoldCurrency&gt;</span><br>
+<span class="m15">&lt;SoldAmount&gt;<span style="color: #000000;">1350000</span>&lt;/SoldAmount&gt;</span><br>
+&lt;/FxOptionData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 9: FX Option data</em></p>
+<p>The meanings and allowable values of the elements in the FXOptionData node follow below.</p>
+<ul>
+<li>OptionData: This is a trade component sub-node outlined in <a href="#optiondata">section 2.3.1</a>. Note that the FX option type allows for <em>European and American </em> option style only.</li>
+<li>BoughtCurrency: The bought currency of the FX option. Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>BoughtAmount: The amount in the BoughtCurrency. Allowable values: Any positive real number.</li>
+<li>SoldCurrency: The sold currency of the FX option. Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>SoldAmount: The amount in the SoldCurrency. Allowable values: Any positive real number.</li>
+</ul>
+<h3><a id="equityop"></a>2.2.9 Equity Option</h3>
+<p>The EquityOptionData node is the trade data container for the equity option trade type. Vanilla equity options are supported, the exercise style must be European. The EquityOptionData node includes one and only one OptionData trade component sub-node plus elements specific to the equity option. The structure of an example EquityOptionData node for an equity option is shown in Listing 10.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;EquityOptionData&gt;<br>
+<span class="m15">&lt;OptionData&gt;</span><br>
+<span class="m30">…</span><br>
+<span class="m15">&lt;/OptionData&gt;</span><br>
+<span class="m15">&lt;Name&gt;SP5&lt;/Name&gt;</span><br>
+<span class="m15">&lt;Currency&gt;USD&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Strike&gt;2147.56&lt;/Strike&gt;</span><br>
+<span class="m15">&lt;Quantity&gt;17000&lt;/Quantity&gt;</span><br>
+&lt;/EquityOptionData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 10: Equity Option data</em></p>
+<p>The meanings and allowable values of the elements in the EquityOptionData node follow below.</p>
+<ul>
+<li>OptionData: This is a trade component sub-node outlined in section <a href="#optiondata">2.3.1</a> Option Data. Note that the equity option type allows for European option style only.</li>
+<li>Name: The name of the underlying equity.<br>
+Allowable values: Any string (provided it is the ID of an equity in the market configuration). Typically an ISIN-code with the <em>ISIN: </em>prefix.</li>
+<li>Currency: The currency of the equity option. Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>Strike: The option strike price.<br>
+Allowable values: Any positive real number.</li>
+<li>Quantity: The number of units of the underlying covered by the transaction. Allowable values: Any positive real number.</li>
+</ul>
+<h3><a id="equityfo"></a>2.2.10 Equity Forward</h3>
+<p>The EquityForwardData node is the trade data container for the equity forward trade type. Vanilla equity forwards are supported. The structure of an example EquityForwardData node for an equity option is shown in Listing 11.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;EquityForwardData&gt;<br>
+<span class="m15">&lt;LongShort&gt;<span style="color: #000000;">Long</span>&lt;/LongShort&gt;</span><br>
+<span class="m15">&lt;Maturity&gt;<span style="color: #000000;">2018-06-30</span>&lt;/Maturity&gt;</span><br>
+<span class="m15">&lt;Name&gt;<span style="color: #000000;">SP5</span>&lt;/Name&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">USD</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Strike&gt;<span style="color: #000000;">2147.56</span>&lt;/Strike&gt;</span><br>
+<span class="m15">&lt;Quantity&gt;<span style="color: #000000;">17000</span>&lt;/Quantity&gt;</span><br>
+&lt;/EquityForwardData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 11: Equity Forward data</em></p>
+<p>The meanings and allowable values of the elements in the EquityForwardData node follow below.</p>
+<ul>
+<li>LongShort: Defines whether the underlying equity will be bought (long) or sold (short).<br>
+Allowable values: Long, Short.</li>
+<li>Maturity: The maturity date of the forward contract i.e. the date when the underlying equity will be bought/sold.<br>
+Allowable values: Any date string, see Date in <a href="#table4">Table 4</a>.</li>
+<li>Name: The name of the underlying equity single name or equity index.<br>
+Allowable values: Any string (provided it is the ID of an equity in the market configuration). Typically an ISIN-code with the <em>ISIN: </em>prefix.</li>
+<li>Currency: The currency of the equity forward. Allowable values: See Currency in <a href="#table3">Table 4</a>.</li>
+<li>Strike: The agreed buy/sell price of the equity forward.<br>
+Allowable values: Any positive real number.</li>
+<li>Quantity: The number of units of the underlying equity to be bought/sold. Allowable values: Any positive real number.</li>
+</ul>
+<h3><a id="equityswap"></a>2.2.11 Equity Swap</h3>
+<p>An Equity Swap is set up as a swap using the SwapData node, with one leg of type Equity and one more leg that can be either Fixed or Floating. Listing 12 shows an example. The Equity leg contains an additional EquityLegData block. <a href="#equitylegdata">See 2.3.10</a> for details on the Equity leg specification.</p>
+<p> </p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;SwapData&gt;&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">Floating</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">true</span>&lt;/Payer&gt;</span><br>
+<span class="m30"><span style="color: #000000;">…</span></span><br>
+<span class="m30">&lt;/LegData&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">Equity</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m30"><span style="color: #000000;">…</span></span><br>
+<span class="m30">&lt;EquityLegData&gt;</span><br>
+<span class="m30"><span style="color: #000000;">…</span></span><br>
+<span class="m30">&lt;/EquityLegData&gt;</span><br>
+<span class="m30">&lt;/LegData&gt;</span><br>
+&lt;/SwapData<span style="font-family: inherit; font-size: inherit;">&gt;</span></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 12: Equity Swap Data</em></p>
+<h3><a id="cpiswap"></a>2.2.12 CPI Swap</h3>
+<p>A CPI swap is set up as a swap, with one leg of type CPI. Listing 13 shows an example. The CPI leg contains an additional CPILegData block. See <a href="#cpileg">2.3.11</a> for details on the CPI leg specification.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;SwapData&gt;<br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<span style="color: #000000;">Floating</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">true</span>&lt;/Payer&gt;</span><br>
+<span class="m30">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<span style="color: #000000;">CPI</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m30">&lt;CPILegData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m30">&lt;/CPILegData&gt;</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+&lt;/SwapData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 13: CPI Swap Data</em></p>
+<h3><a id="yearonyear"></a>2.2.13 Year on Year Inflation Swap</h3>
+<p>A Year on Year inflation swap is set up as a swap, with one leg of type YY. Listing 14 shows an example. The YY leg contains an additional YYLegData block. See <a href="#yylegdata">2.3.12</a> for details on the YY leg specification.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;SwapData&gt;<br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<span style="color: #000000;">Floating</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">true</span>&lt;/Payer&gt;</span><br>
+<span class="m30">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<span style="color: #000000;">YY</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m30"><span style="color: #000000;">…</span><br>
+<span class="m30">&lt;YYLegData&gt;</span><br>
+<span class="m30"><span style="color: #000000;">…</span><br>
+<span class="m30">&lt;/YYLegData&gt;</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+&lt;/SwapData&gt;</span></span></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 14: Year on Year Swap Data</em></p>
+<h3><a id="bond"></a>2.2.14 Bond</h3>
+<p>A vanilla Bond is set up using a BondData block as shown in listing 15. The bond specific elements are</p>
+<ul>
+<li>IssuerId: A unique identifier for the issuer of the bond</li>
+<li>CreditCurveId: The identifier of the default curve used for pricing, which must match a default curve id in the market data configuration</li>
+<li>SecurityId: A unique identifier for the security, this defines the security specific spread to be used for pricing.</li>
+<li>ReferenceCurveId: The benchmark curve to be used for pricing, this must match a name of a yield curve in the market data configuration.</li>
+<li>SettlementDays: The settlement delay applicable to the security.</li>
+<li>Calendar: The calendar associated to the settlement lag.</li>
+<li>IssueDate: The issue date of the security.</li>
+</ul>
+<p>A LegData block then defines the cashflow structure of the bond, this can be of type fixed, floating etc.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;BondData&gt;<br>
+<span class="m15">&lt;IssuerId&gt;<span style="color: #000000;">CPTY_C</span>&lt;/IssuerId&gt;</span><br>
+<span class="m15">&lt;CreditCurveId&gt;<span style="color: #000000;">CPTY_C</span>&lt;/CreditCurveId&gt;</span><br>
+<span class="m15">&lt;SecurityId&gt;<span style="color: #000000;">SECURITY_1</span>&lt;/SecurityId&gt;</span><br>
+<span class="m15">&lt;ReferenceCurveId&gt;<span style="color: #000000;">EUR-EURIBOR-6M</span>&lt;/ReferenceCurveId&gt;</span><br>
+<span class="m15">&lt;SettlementDays&gt;<span style="color: #000000;">2</span>&lt;/SettlementDays&gt;</span><br>
+<span class="m15">&lt;Calendar&gt;<span style="color: #000000;">TARGET</span>&lt;/Calendar&gt;</span><br>
+<span class="m15">&lt;IssueDate&gt;<span style="color: #000000;">20160203</span>&lt;/IssueDate&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<span style="color: #000000;">Fixed</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+&lt;/BondData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing  15:  Bond Data</em></p>
+<p>The bond pricing requires a recovery rate that can be specified per SecurityId in the market data configuration.</p>
+<h3><a id="creditdefault"></a>2.2.15 Credit Default Swap</h3>
+<p>A credit default swap is set up using a CreditDefaultSwapData block as shown in listing 16. The CDS specific elements are</p>
+<ul>
+<li>IssuerId: An identifier for the reference entity of the For informational pur- poses and not used for pricing.</li>
+<li>CreditCurveId: Typically the ISIN-code of the reference entity defining the default curve used for Other identifiers may be used as well, provided they are supported in the market data configuration.</li>
+<li>SettlesAccrual [Optional]: Whether or not the accrued coupon is due in the event of a This defaults to true if not provided.</li>
+<li>PaysAtDefaultTime [Optional]: If set to true, any payments triggered by a default event are due at default If set to false, they are due at the end of the accrual period. This defaults to true if not provided.</li>
+<li>ProtectionStart [Optional]: The first date where a default event will trigger the contrac This defaults to the first date in the schedule if it is not provided.</li>
+<li>UpfrontDate [Optional]: Settlement date for the UpfrontFee if an UpfrontFee is provided. If an UpfrontFee is provided and it is non-zero, UpfrontDate is The UpfrontDate, if provided, must be on or after the ProtectionStart date.</li>
+<li>UpfrontFee [Optional]: The upfront payment, expressed as a rate, to be multiplied by notional amoun</li>
+<li>FixedRecoveryRate [Optional]: This node holds the fixed recovery rate if the CDS is a fixed recovery For a standard CDS, this field should be omitted.</li>
+</ul>
+<p>A LegData block then defines the cashflow structure of the credit default swap, this must be be of type fixed.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;CreditDefaultSwapData&gt;<br>
+<span class="m15">&lt;IssuerId&gt;<span style="color: #000000;">CPTY_A</span>&lt;/IssuerId&gt;</span><br>
+<span class="m15">&lt;CreditCurveId&gt;<span style="color: #000000;">BANK</span>&lt;/CreditCurveId&gt;</span><br>
+<span class="m15">&lt;SettlesAccrual&gt;<span style="color: #000000;">Y</span>&lt;/SettlesAccrual&gt;</span><br>
+<span class="m15">&lt;PaysAtDefaultTime&gt;<span style="color: #000000;">Y</span>&lt;/PaysAtDefaultTime&gt;</span><br>
+<span class="m15">&lt;ProtectionStart&gt;<span style="color: #000000;">20160206</span>&lt;/ProtectionStart&gt;</span><br>
+<span class="m15">&lt;UpfrontDate&gt;<span style="color: #000000;">20160208</span>&lt;/UpfrontDate&gt;</span><br>
+<span class="m15">&lt;UpfrontFee&gt;<span style="color: #000000;">0.0</span>&lt;/UpfrontFee&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<span style="color: #000000;">Fixed</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+&lt;/CreditDefaultSwapData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 16: CreditDefaultSwap Data</em></p>
+<h3><a id="comoption"></a>2.2.16 Commodity Option</h3>
+<p>The CommodityOptionData node is the trade data container for the commodity option trade type. Vanilla commodity options are supported, the exercise style must be European. The CommodityOptionData node includes one and only one OptionData trade component sub-node plus elements specific to the commodity option. The structure of an example CommodityOptionData node for a commodity option is shown in Listing 17.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;CommodityOptionData&gt;<br>
+<span class="m15">&lt;OptionData&gt;</span><br>
+<span class="m30">…</span><br>
+<span class="m15">&lt;/OptionData&gt;</span><br>
+<span class="m15">&lt;Name&gt;<span style="color: #000000;">COMDTY_WTI_USD</span>&lt;/Name&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">USD</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Strike&gt;<span style="color: #000000;">70</span>&lt;/Strike&gt;</span><br>
+<span class="m15">&lt;Quantity&gt;<span style="color: #000000;">500000</span>&lt;/Quantity&gt;</span><br>
+&lt;/CommodityOptionData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 17: Commodity Option data</em></p>
+<p>The meanings and allowable values of the elements in the CommodityOptionData node follow below.</p>
+<ul>
+<li>OptionData: This is a trade component sub-node outlined in section <a href="#optiondata">2.3.1</a> Option Data. Note that the commodity option type allows for European option style only.</li>
+<li>Name: The name of the underlying commodity.<br>
+Allowable values: Any string (provided it is the ID of a commodity in the market configuration).</li>
+<li>Currency: The currency of the commodity option. Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>Strike: The option strike price.<br>
+Allowable values: Any positive real number.</li>
+<li>Quantity: The number of units of the underlying commodity covered by the transaction. Allowable values: Any positive real number.</li>
+</ul>
+<h3><a id="comforward"></a>2.2.17 Commodity Forward</h3>
+<p>The CommodityForwardData node is the trade data container for the commodity forward trade type. The structure of an example CommodityForwardData node for an equity option is shown in Listing 18.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;CommodityForwardData&gt;<br>
+<span class="m15">&lt;LongShort&gt;<span style="color: #000000;">Long</span>&lt;/LongShort&gt;</span><br>
+<span class="m15">&lt;Maturity&gt;<span style="color: #000000;">2018-06-30</span>&lt;/Maturity&gt;</span><br>
+<span class="m15">&lt;Name&gt;<span style="color: #000000;">COMDTY_GOLD_USD</span>&lt;/Name&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">USD</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Strike&gt;<span style="color: #000000;">1355</span>&lt;/Strike&gt;</span><br>
+<span class="m15">&lt;Quantity&gt;<span style="color: #000000;">1000</span>&lt;/Quantity&gt;</span><br>
+&lt;/CommodityForwardData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 18: Commodity Forward data</em></p>
+<p>The meanings and allowable values of the elements in the CommodityForwardData node follow below.</p>
+<ul>
+<li>LongShort: Defines whether the underlying commodity will be bought (long) or sold (short).<br>
+Allowable values: <em>Long, Short.</em></li>
+<li>The maturity date of the forward contract, i.e. the date when the underlying commodity will be bought/sold.<br>
+Allowable values: Any date string, see Date in <a href="#table4">Table 4</a>.</li>
+<li>Name: The name of the underlying commodity.<br>
+Allowable values: Any string (provided it is the ID of an equity in the market configuration).</li>
+<li>Currency: The currency of the commodity forward.<br>
+Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>Strike: The agreed buy/sell price of the commodity forward.<br>
+Allowable values: Any positive real number.</li>
+<li>Quantity: The number of units of the underlying commodity to be bought/sold. Allowable values: Any positive real number.</li>
+</ul>
+<h3><a id="tradecomponent"></a>2.3 Trade Components</h3>
+<p>Trade components are XML sub-nodes used within the trade data containers to define sets of trade data that more than one trade type can have in common, such as a leg or a schedule. A trade data container can include multiple trade components such as a swap with multiple legs, and a trade component can itself contain further trade components in a nested way.</p>
+<p>An example of a SwapData trade data container, including two LegData trade compo- nents which in turn include further trade components such as FixedLegData, ScheduleData and FloatingLegData is shown in Listing 19.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;SwapData&gt;<br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30">&lt;Payer&gt;<span style="color: #000000;">true</span>&lt;/Payer&gt;</span><br>
+<span class="m30">&lt;LegType&gt;<span style="color: #000000;">Fixed</span>&lt;/LegType&gt;</span><br>
+<span class="m30">&lt;Currency&gt;<span style="color: #000000;">EUR</span>&lt;/Currency&gt;</span><br>
+<span class="m30">&lt;PaymentConvention&gt;Following&lt;/PaymentConvention&gt;</span><br>
+<span class="m30">&lt;DayCounter&gt;<span style="color: #000000;">30/360</span>&lt;/DayCounter&gt;</span><br>
+<span class="m30">&lt;Notionals&gt;</span><br>
+<span class="m45">&lt;Notional&gt;<span style="color: #000000;">1000000</span>&lt;/Notional&gt;</span><br>
+<span class="m30">&lt;/Notionals&gt;</span><br>
+<span class="m30">&lt;ScheduleData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m30">&lt;/ScheduleData&gt;</span><br>
+<span class="m30">&lt;FixedLegData&gt;</span><br>
+<span class="m45">&lt;Rates&gt;</span><br>
+<span class="m60">&lt;Rate&gt;<span style="color: #000000;">0.035</span>&lt;/Rate&gt;</span><br>
+<span class="m45">&lt;/Rates&gt;</span><br>
+<span class="m30">&lt;/FixedLegData&gt;</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+<span class="m15">&lt;LegData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m30">&lt;ScheduleData&gt;</span><br>
+<span class="m45" style="color: #000000;">…</span><br>
+<span class="m30">&lt;/ScheduleData&gt;</span><br>
+<span class="m30">&lt;FloatingLegData&gt;</span><br>
+<span class="m45">…</span><br>
+<span class="m30">&lt;/FloatingLegData&gt;</span><br>
+<span class="m15">&lt;/LegData&gt;</span><br>
+&lt;/SwapData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 19: Trade Components Example</em></p>
+<p>Descriptions of all trade components supported in ORE follow below.</p>
+<h3><a id="optiondata"></a>2.3.1 Option Data</h3>
+<p>This trade component node is used within the SwaptionData and FXOptionData trade data containers. It contains the ExerciseDates sub-node which includes ExerciseDate child elements. An example structure of the OptionData trade component node is shown in Listing 20.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;OptionData&gt;<br>
+<span class="m15">&lt;LongShort&gt;<span style="color: #000000;">Long</span>&lt;/LongShort&gt;</span><br>
+<span class="m15">&lt;OptionType&gt;<span style="color: #000000;">Call</span>&lt;/OptionType&gt;</span><br>
+<span class="m15">&lt;Style&gt;<span style="color: #000000;">Bermudan</span>&lt;/Style&gt;</span><br>
+<span class="m15">&lt;Settlement&gt;<span style="color: #000000;">Cash</span>&lt;/Settlement&gt;</span><br>
+<span class="m15">&lt;PayOffAtExpiry&gt;<span style="color: #000000;">true</span>&lt;/PayOffAtExpiry&gt;</span><br>
+<span class="m15">&lt;ExerciseDates&gt;</span><br>
+<span class="m30">&lt;ExerciseDate&gt;<span style="color: #000000;">2016-04-20</span>&lt;/ExerciseDate&gt;</span><br>
+<span class="m30">&lt;ExerciseDate&gt;<span style="color: #000000;">2017-04-20</span>&lt;/ExerciseDate&gt;</span><br>
+<span class="m15">&lt;/ExerciseDates&gt;</span><br>
+&lt;/OptionData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing  20:  Option data</em></p>
+<p>The meanings and allowable values of the elements in the OptionData node follow below.</p>
+<ul>
+<li>LongShort: Specifies whether the option position is long or short. Allowable values: Long, LONG, long, L or Short, SHORT, short, S</li>
+<li>OptionType: Specifies whether it is a call or a put option.<br>
+Allowable values: Call or Put<br>
+The meaning of Call and Put values depend on the asset class of the option, see <a href="#table2">Table 2</a>:</li>
+</ul>
+<p><a id="table2"></a></p>
+<table class="full_width">
+<tbody>
+<tr>
+<td><strong>Asset Class</strong></td>
+<td><strong>Call / Put Specifications</strong></td>
+</tr>
+<tr>
+<td>Equity / Commodity Option</td>
+<td><strong>Call</strong>: The right to buy the underlying equity/commodity at the strike price.<br>
+<strong>Put</strong>: The right to sell the underlying equity/commodity at the strike price.</td>
+</tr>
+<tr>
+<td>IR Swaption</td>
+<td><strong>Call</strong>/<strong>Put</strong> values are ignored. Payer/Receiver swaption is determined in the Leg Data nodes of the underlying swap.</td>
+</tr>
+<tr>
+<td>FX Option</td>
+<td><strong>Call</strong>: Bought and Sold currencies/amounts stay as determined in the Option Data node.<br>
+<strong>Put</strong>: Bought and Sold currencies/amounts are switched compared to the Option Data node.</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Table 2: Specification of Option Type Call / Put</em></p>
+<ul>
+<li>Style: The exercise style of the option.<br>
+Allowable values: European or American or Bermudan. Note that trade type Swaption can have style European or Bermudan, but not American. The FX Option trade type can have style European or American, but not Bermudan.</li>
+<li>Settlement: Delivery type. Allowable values: Cash or Physical</li>
+<li>SettlementMethod [Optional]: Specifies the method to calculate the settlement amount for swaptions.<br>
+Allowable values: <em>PhysicalOTC, PhysicalCleared, CollateralizedCashPrice, ParYieldCurve</em>.<br>
+Defaults to ParYieldCurve if Settlement is Cash and defaults to PhysicalOTC if Settlement is Physical.<br>
+<em>PhysicalOTC</em> = OTC traded swaptions with physical settlement<br>
+<em>PhysicalCleared</em> = Cleared swaptions with physical settlement<br>
+<em>CollateralizedCashPrice</em> = Cash settled swaptions with settlement price calculation using zero coupon curve discounting<br>
+<em>ParYieldCurve</em> = Cash settled swaptions with settlement price calculation using par yield discounting 1 2</li>
+<li>PayOffAtExpiry [Optional]: Relevant for options with early exercise, i.e. the exercise occurs before expiry; <em>true</em> indicates payoff at expiry, whereas <em>false</em> indicates payoff at exercise. Defaults to <em>false</em> if left blank or omitted.<br>
+Allowable values: <em>true, false</em></li>
+<li>ExerciseDates: This node contains child elements of type ExerciseDate. Options of style <em>European</em> or <em>American</em> require a single exercise date expressed by one single ExerciseDate child element. <em>Bermudan</em> style options must have two or more ExerciseDate child elements.</li>
+<li>PremiumAmount [Optional]: Option premium amount paid by the option buyer to the option seller.<br>
+Allowable values: Any positive real number.</li>
+<li>PremiumCurrency [Optional]: Currency of the option premium.<br>
+Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>PremiumPayDate [Optional]: Date of the option premium payment.<br>
+Allowable values: See Date in <a href="#table4">Table 4</a>.</li>
+</ul>
+<h3><a id="legdata"></a>2.3.2 Leg Data and Notionals</h3>
+<p>The LegData trade component node is used within the CapFloorData, SwapData and SwaptionData trade data containers. It contains a ScheduleData trade component sub-node, and a sub-node that depends on the value of the LegType element, e.g.: FixedLegData for LegType <em>Fixed </em>or FloatingLegData for LegType <em>Floating</em>. The LegData node also includes a Notionals sub-node with Notional child elements de- scribed below. An example structure of a LegData node of LegType <em>Floating </em>is shown in Listing 21.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">Floating</span>&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">EUR</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;PaymentConvention&gt;<span style="color: #000000;">Following</span>&lt;/PaymentConvention&gt;</span><br>
+<span class="m15">&lt;DayCounter&gt;<span style="color: #000000;">30/360</span>&lt;/DayCounter&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m30">&lt;Notional&gt;<span style="color: #000000;">1000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;ScheduleData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/ScheduleData&gt;</span><br>
+<span class="m15">&lt;FloatingLegData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/FloatingLegData&gt;</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing  21:  Leg data</em></p>
+<p>The meanings and allowable values of the elements in the LegData node follow below.</p>
+<ul>
+<li>LegType: Determines which of the available sub-nodes must be used. Allowable values: Fixed, Floating, Cashflow, CMS, CMSSpread, <em>DigitalCMSSpread, Equity, YY, CPI, ZeroCouponFixed</em></li>
+<li>Payer: The flows of the leg are paid to the counterparty if true, and received if false.<br>
+Allowable values: true, false</li>
+<li>Currency: The currency of the leg. Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>PaymentConvention: The payment convention of the leg coupons. Allowable values: See Roll Convention in <a href="#table4">Table 4</a>.</li>
+<li>PaymentLag [optional]: The payment lag given as as number business days, applies to fixed, Ibor and OIS legs.<br>
+Allowable values: A non-negative whole number, if not given it defaults to zero.</li>
+<li>DayCounter: The day count convention of the leg coupons. Allowable values: See DayCount Convention in <a href="#table6">Table 6</a>.</li>
+<li>Notionals: This node contains child elements of type Notional. If the notional is fixed over the life of the leg only one notional value should be entered. If the notional is amortising or accreting, this is represented by entering multiple notional values, each represented by a Notional child element. The first notional value corresponds to the first coupon, the second notional value corresponds to the second coupon, etc. If the number of coupons exceeds the number of notional values, the notional will be kept flat at the value of last entered notional for the remaining coupons. The number of entered notional values cannot exceed the number of coupons.<br>
+Allowable values: Each child element can take any positive real number.</li>
+</ul>
+<p>An example of a Notionals element for an amortising leg with four coupons is shown in Listing 22.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;Notionals&gt;<br>
+<span class="m15">&lt;Notional&gt;<span style="color: #000000;">65000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;Notional&gt;<span style="color: #000000;">65000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;Notional&gt;<span style="color: #000000;">55000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;Notional&gt;<span style="color: #000000;">45000000</span>&lt;/Notional&gt;</span><br>
+&lt;/Notionals&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing  22:  Notional list</em></p>
+<p>Another allowable specification of the notional schedule is shown in Listing 23.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;Notionals&gt;<br>
+<span class="m15">&lt;Notional&gt;<span style="color: #000000;">65000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;NotionalstartDate=’<span style="color: #ff0000;">2016-01-02</span>’&gt;<span style="color: #000000;">65000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;NotionalstartDate=’<span style="color: #ff0000;">2017-01-02</span>’&gt;<span style="color: #000000;">55000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;NotionalstartDate=’<span style="color: #ff0000;">2021-01-02</span>’&gt;<span style="color: #000000;">45000000</span>&lt;/Notional&gt;</span><br>
+&lt;/Notionals&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 23: Notional list with dates</em></p>
+<p>The first notional must not have a start date, it will be associated with the sched- ule’s start, The subsequent notionals can have a start date specified from which date onwards the new notional is applied. This allows specifying notionals only for dates where the notional changes.</p>
+<p>In case of exchange of currencies an initial exchange, a final exchange and an amortising exchange can be specified using an Exchanges child element with NotionalInitialExchange, NotionalFinalExchange and NotionalAmortizingExchange as subelements, see Listing 24.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;Notionals&gt;<br>
+<span class="m15">&lt;Notional&gt;<span style="color: #000000;">65000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;Exchanges&gt;</span><br>
+<span class="m30">&lt;NotionalInitialExchange&gt;<span style="color: #000000;">true</span>&lt;/NotionalInitialExchange&gt;</span><br>
+<span class="m30">&lt;NotionalFinalExchange&gt;<span style="color: #000000;">true</span>&lt;/NotionalFinalExchange&gt;</span><br>
+<span class="m30">&lt;NotionalAmortizingExchange&gt;<span style="color: #000000;">true</span>&lt;/NotionalAmortizingExchange&gt;</span><br>
+<span class="m15">&lt;/Exchanges&gt;</span><br>
+&lt;/Notionals&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 24: Notional list with exchange</em></p>
+<p>FX Resets, used for Rebalancing Cross-currency swaps, can be specified using an FXReset child element with the following subelements: See Listing 25 for an exam- ple.</p>
+<ul>
+<li>ForeignCurrency: The foreign currency the notional of the leg resets Allowable values: See Currency in <a href="#table4">Table 4</a>.</li>
+<li>ForeignAmount: The notional amount in the foreign currency that the notional of the leg resets<br>
+Allowable values: Any positive real number.</li>
+<li>FXIndex: A reference to an FX Index source for the FX reset Allowable values: A string on the form FX-SOURCE-CCY1-CCY2.</li>
+<li>FixingDays: The FX fixing lag in business days Allowable values: Any integer.</li>
+<li>FixingCalendar[Optional]: The calendar associated with the FX</li>
+</ul>
+<p>Allowable values: See <a href="#table5">Table 5</a> Calendar. Defaults to the null calendar if left blank or omitted.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;Currency&gt;USD&lt;/Currency&gt;<br>
+&lt;Notionals&gt;<br>
+<span class="m15">&lt;Notional&gt;<span style="color: #000000;">65000000</span>&lt;/Notional&gt; <em>&lt;!– in USD –&gt;</em></span><br>
+<span class="m15">&lt;FXReset&gt;</span><br>
+<span class="m30">&lt;ForeignCurrency&gt;<span style="color: #000000;">EUR</span>&lt;/ForeignCurrency&gt;</span><br>
+<span class="m30">&lt;ForeignAmount&gt;<span style="color: #000000;">60000000</span>&lt;/ForeignAmount&gt;</span><br>
+<span class="m30">&lt;FXIndex&gt;<span style="color: #000000;">FX-SOURCE-USD-EUR</span>&lt;/FXIndex&gt;</span><br>
+<span class="m30">&lt;FixingDays&gt;<span style="color: #000000;">2</span>&lt;/FixingDays&gt;</span><br>
+<span class="m30">&lt;FixingCalendar&gt;<span style="color: #000000;">TARGET</span>&lt;/FixingCalendar&gt;</span><br>
+<span class="m15">&lt;/FXReset&gt;</span><br>
+&lt;/Notionals&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 25: Notional list with exchange</em></p>
+<p>After the Notional sub-node the LegData node includes a ScheduleData sub- node, and a sub-node based on the choice of LegType as per below:</p>
+<ul>
+<li>ScheduleData: This is a trade component sub-node outlined in section <a href="#scheduledata">2.3.3</a> Schedule Data and Dates</li>
+<li>FixedLegData: This trade component sub-node is required if LegType is set to <em>fixed</em> It is outlined in section <a href="#fixedleg">2.3.4</a>.</li>
+<li>FloatingLegData: This trade component sub-node is required if LegType is set to <em>floating</em> It is outlined in section <a href="#floatingleg">2.3.5</a> Floating Leg Data and Spreads.</li>
+<li>CMSLegData: This trade component sub-node is required if LegType is set to <em>CMS</em>. It is outlined in section <a href="#cmslegdata">2.3.7</a>.</li>
+<li>CMSSpreadLegData: This trade component sub-node is required if LegType is set to <em>CM</em><em>SSpread</em>. It is outlined in section <a href="#cmsspread">2.3.8</a>.</li>
+<li>DigitalCMSSpreadLegData: This trade component sub-node is required if LegType is set to <em>D</em><em>igitalCMSSpread</em>. It is outlined in section <a href="#digitalcmsspread">2.3.9</a>.</li>
+<li>EquityLegData: This trade component sub-node is required if LegType is set to <em>Equity</em>. It is outlined in section <a href="#equitylegdata">2.3.10</a>.</li>
+<li>CPILegData: This trade component sub-node is required if LegType is set to <em>CPI</em>. It is outlined in section <a href="#cpileg">2.3.11</a>.</li>
+<li>YYLegData: This trade component sub-node is required if LegType is set to <em>YY</em>. It is outlined in section <a href="#yylegdata">2.3.12</a>.</li>
+<li>ZeroCouponFixedLegData: This trade component sub-node is required if LegType is set to <em>ZeroCouponFixed</em>. It is outlined in section <a href="#zerocouponsfixed">2.3.13</a>.</li>
+</ul>
+<h3><a id="scheduledata"></a>2.3.3 Schedule Data (Rules and Dates)</h3>
+<p>The ScheduleData trade component node is used within the LegData trade component. The Schedule can both be rules based (at least one sub-node Rules exists) and dates based (at least one Dates sub-node exists, where the schedule is determined directly by Date child elements). In rules based schedules, the schedule dates are generated from a set of rules based on the entries of the sub-node Rules, having the elements StartDate, EndDate, Tenor, Calendar, Convention, TermConvention, and Rule. Example structures of ScheduleData nodes based on rules respectively dates are shown in Listing 26 and Listing 27, respectively.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;ScheduleData&gt;<br>
+<span class="m15">&lt;Rules&gt;</span><br>
+<span class="m30">&lt;StartDate&gt;<span style="color: #000000;">2013-02-01</span>&lt;/StartDate&gt;</span><br>
+<span class="m30">&lt;EndDate&gt;<span style="color: #000000;">2030-02-01</span>&lt;/EndDate&gt;</span><br>
+<span class="m30">&lt;Tenor&gt;<span style="color: #000000;">1Y</span>&lt;/Tenor&gt;</span><br>
+<span class="m30">&lt;Calendar&gt;<span style="color: #000000;">UK</span>&lt;/Calendar&gt;</span><br>
+<span class="m30">&lt;Convention&gt;<span style="color: #000000;">MF</span>&lt;/Convention&gt;</span><br>
+<span class="m30">&lt;TermConvention&gt;<span style="color: #000000;">MF</span>&lt;/TermConvention&gt;</span><br>
+<span class="m30">&lt;Rule&gt;<span style="color: #000000;">Forward</span>&lt;/Rule&gt;</span><br>
+<span class="m15">&lt;/Rules&gt;</span><br>
+&lt;/ScheduleData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 26: Schedule data, rules based</em></p>
+<h1></h1>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;ScheduleData&gt;<br>
+<span class="m15">&lt;Dates&gt;</span><br>
+<span class="m30">&lt;Date&gt;<span style="color: #000000;">2012-01-06</span>&lt;/Date&gt;</span><br>
+<span class="m30">&lt;Date&gt;<span style="color: #000000;">2012-04-10</span>&lt;/Date&gt;</span><br>
+<span class="m30">&lt;Date&gt;<span style="color: #000000;">2012-07-06</span>&lt;/Date&gt;</span><br>
+<span class="m30">&lt;Date&gt;<span style="color: #000000;">2012-10-08</span>&lt;/Date&gt;</span><br>
+<span class="m30">&lt;Date&gt;<span style="color: #000000;">2013-01-07</span>&lt;/Date&gt;</span><br>
+<span class="m30">&lt;Date&gt;<span style="color: #000000;">2013-04-08</span>&lt;/Date&gt;</span><br>
+<span class="m15">&lt;/Dates&gt;</span><br>
+&lt;/ScheduleData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 27: Schedule data, date based</em></p>
+<p>The ScheduleData section can contain any number and combination of &lt;Dates&gt; and &lt;Rules&gt; sections. The resulting schedule will then be an ordered concatenation of individual schedules.<br>
+The meanings and allowable values of the elements in a &lt;Rules&gt; based section of the ScheduleData node follow below.</p>
+<ul>
+<li>Rules: a sub-node that determines whether the schedule is set by specifying rules that generate the schedule. If existing, the following entries are required: Start- Date, EndDate, Tenor, Calendar, Convention, TermConvention, and Rule. If not existing, the Dates sub-node is required</li>
+<li>StartDate: The schedule start date.<br>
+Allowable values: See Date in <a href="#table4">Table 4</a>.</li>
+<li>EndDate: The schedule end date.<br>
+Allowable values: See Date in <a href="#table4">Table 4</a>.</li>
+<li>Tenor: The tenor used to generate schedule dates.<br>
+Allowable values: A string where the last character must be D or W or M or Y. The characters before that must be a positive integer.<br>
+D = Day, W = Week, M = Month, Y = Year</li>
+<li>Calendar: The calendar used to generate schedule dates.<br>
+Allowable values: See <a href="#table5">Table 5</a> Calendar.</li>
+<li>Convention: Determines the adjustment of the schedule dates with regards to the selected calendar.<br>
+Allowable values: See Roll Convention in <a href="#table4">Table 4</a>.</li>
+<li>TermConvention: Determines the adjustment of the final schedule date with re- gards to the selected calendar.<br>
+Allowable values: See Roll Convention in <a href="#table4">Table 4</a></li>
+<li>Rule [Optional]: Rule for the generation of the schedule using given start and end dates, tenor, calendar and business day conventions.<br>
+Allowable values and descriptions: See <a href="#table3">Table 3</a> Rule. Defaults to Forward if left blank or omitted.</li>
+<li>EndOfMonth [Optional]: Specifies whether the date generation rule is different for end of month.<br>
+Allowable values: True, False. Defaults to False if left blank or omitted. Must be set to False or omitted if the date generation Rule is set to CDS or CDS2015.</li>
+<li>FirstDate [Optional]: Date for initial stub period.<br>
+Allowable values: See Date in <a href="#table4">Table 4</a>. Incompatible with date generation Rule<br>
+CDS and CDS2015.</li>
+<li>LastDate [Optional]: Date for final stub period. Allowable values: See Date in <a href="#table4">Table 4</a>.</li>
+</ul>
+<p>The meanings and allowable values of the elements in a based section of the ScheduleData node follow below.</p>
+<ul>
+<li>Dates: a sub-node that determines that the schedule is set by specifying schedule dates explicitly.</li>
+<li>Calendar [Optional]: Calendar used to determine payment dates, and also to com- pute day count fractions for irregular periods when day count convention is ActActISMA and the schedule is dates based.<br>
+Allowable values: See <a href="#table5">Table 5</a> Calendar. Defaults to NullCalendar if omitted, i.e. no holidays at all, not even on weekends.</li>
+<li>Convention [Optional]: Convention used to compute day count fractions for irregular periods when day count convention is ActActISMA and the schedule is dates based.<br>
+Allowable values: See Roll Convention in <a href="#table4">Table 4</a>. Defaults to <em>Unadjusted</em> if omitted.</li>
+<li>Tenor [Optional]: Tenor used to compute day count fractions for irregular periods when day count convention is ActActISMA and the schedule is dates based.<br>
+Allowable values: A string where the last character must be D or W or M or Y. The characters before that must be a positive integer.<br>
+D = Day, W = Week, M = Month, Y = Year Defaults to <em>null</em> if omitted.</li>
+<li>Dates: This is a sub-sub-node and contains child elements of type Date. In this case the schedule dates are determined directly by the Date child elements. At least two Date child elements must be provided.<br>
+Allowable values: Each Date child element can take the allowable values listed in Date in <a href="#table4">Table 4</a>.</li>
+</ul>
+<p> <a id="table3"></a></p>
+<table class="full_width">
+<tbody>
+<tr>
+<td><strong>Rule</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Allowable Values</strong></td>
+<td><strong>Effect</strong></td>
+</tr>
+<tr>
+<td><em>Backward</em></td>
+<td>Backward from termination date to effective date.</td>
+</tr>
+<tr>
+<td><em>Forward</em></td>
+<td>Forward from effective date to termination date.</td>
+</tr>
+<tr>
+<td><em>Zero</em></td>
+<td>No intermediate dates between effective date and termination date.</td>
+</tr>
+<tr>
+<td><em>ThirdWednesday</em></td>
+<td>All dates but effective date and termination date are taken to be on the third Wednesday of their month (with forward calculation.)</td>
+</tr>
+<tr>
+<td><em>Twentieth</em></td>
+<td>All dates but the effective date are taken to be the twentieth of their month (used for CDS sched- ules in emerging markets.) The termination date is also modified.</td>
+</tr>
+<tr>
+<td><em>TwentiethIMM</em></td>
+<td>All dates but the effective date are taken to be the twentieth of an IMM month (used for CDS schedules.) The termination date is also modified.</td>
+</tr>
+<tr>
+<td><em>OldCDS</em></td>
+<td>Same as TwentiethIMM with unrestricted date ends and log/short stub coupon period (old CDS convention).</td>
+</tr>
+<tr>
+<td><em>CDS</em></td>
+<td>Credit derivatives standard rule since ’Big Bang’ changes in 2009.</td>
+</tr>
+<tr>
+<td><em>CDS2015</em></td>
+<td>Credit derivatives standard rule updated in 2015. Same as <em>CDS</em> but with termination dates adjusted to 20th June and 20th December.</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Table 3: Allowable Values for Rule</em></p>
+<h3><a id="fixedleg"></a>2.3.4 Fixed Leg Data and Rates</h3>
+<p>The FixedLegData trade component node is used within the LegData trade component when the LegType element is set to Fixed. The FixedLegData node only includes the Rates sub-node which contains the rates of the fixed leg as child elements of type Rate. An example of a FixedLegData node for a fixed leg with constant notional is shown in Listing 28.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;FixedLegData&gt;<br>
+<span class="m15">&lt;Rates&gt;</span><br>
+<span class="m30">&lt;Rate&gt;<span style="color: #000000;">0.05</span>&lt;/Rate&gt;</span><br>
+<span class="m15">&lt;/Rates&gt;</span><br>
+&lt;/FixedLegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 28:  Fixed  leg data</em></p>
+<p>The meanings and allowable values of the elements in the FixedLegData node follow below.</p>
+<ul>
+<li>Rates: This node contains child elements of type Rate. If the rate is constant over the life of the fixed leg, only one rate value should be entered. If two or more coupons have different rates, multiple rate values are required, each represented by a Rate child element. The first rate value corresponds to the first coupon, the second rate value corresponds to the second coupon, etc. If the number of coupons exceeds the number of rate values, the rate will be kept flat at the value of last entered rate for the remaining coupons. The number of entered rate values cannot exceed the number of coupons.<br>
+Allowable values: Each child element can take any real number. The rate is expressed in decimal form, e.g. 0.05 is a rate of 5%.<br>
+As in the case of notionals, the rate schedule can be specified with dates as shown in Listing 29.</li>
+</ul>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;FixedLegData&gt;<br>
+<span class="m15">&lt;Rates&gt;</span><br>
+<span class="m30">&lt;Rate&gt;<span style="color: #000000;">0.05</span>&lt;/Rate&gt;</span><br>
+<span class="m30">&lt;RatestartDate=’<span style="color: #ff0000;">2016-02-04</span>’&gt;<span style="color: #000000;">0.05</span>&lt;/Rate&gt;</span><br>
+<span class="m30">&lt;RatestartDate=’<span style="color: #ff0000;">2019-02-05</span>’&gt;<span style="color: #000000;">0.05</span>&lt;/Rate&gt;</span><br>
+<span class="m15">&lt;/Rates&gt;</span><br>
+&lt;/FixedLegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 29: Fixed leg data with ’dated’ rates</em></p>
+<h3><a id="floatingleg"></a>2.3.5 Floating Leg Data, Spreads, Gearings, Caps and Floors</h3>
+<p>The FloatingLegData trade component node is used within the LegData trade component when the LegType element is set to Floating. It is also used directly within the CapFloor trade data container. The FloatingLegData node includes elements specific to a floating leg as well as the Spreads sub-node which contains the spreads of the floating leg as child elements of type Spread.<br>
+An example of a FloatingLegData node is shown in Listing 30.</p>
+<p> </p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;FloatingLegData&gt;<br>
+<span class="m15">&lt;Index&gt;<span style="color: #000000;">USD-LIBOR-3M</span>&lt;/Index&gt;</span><br>
+<span class="m15">&lt;IsInArrears&gt;<span style="color: #000000;">false</span>&lt;/IsInArrears&gt;</span><br>
+<span class="m15">&lt;FixingDays&gt;<span style="color: #000000;">2</span>&lt;/FixingDays&gt;</span><br>
+<span class="m15">&lt;Spreads&gt;</span><br>
+<span class="m30">&lt;Spread&gt;<span style="color: #000000;">0.005</span>&lt;/Spread&gt;</span><br>
+<span class="m15">&lt;/Spreads&gt;</span><br>
+<span class="m15">&lt;Gearings&gt;</span><br>
+<span class="m30">&lt;Gearing&gt;<span style="color: #000000;">2.0</span>&lt;/Gearing&gt;</span><br>
+<span class="m15">&lt;/Gearings&gt;</span><br>
+<span class="m15">&lt;Caps&gt;</span><br>
+<span class="m30">&lt;Cap&gt;<span style="color: #000000;">0.05</span>&lt;/Cap&gt;</span><br>
+<span class="m15">&lt;/Caps&gt;</span><br>
+<span class="m15">&lt;Floors&gt;</span><br>
+<span class="m30">&lt;Floor&gt;<span style="color: #000000;">0.01</span>&lt;/Floor&gt;</span><br>
+<span class="m15">&lt;/Floors&gt;</span><br>
+&lt;/FloatingLegData&gt;<br>
+&lt;NakedOption&gt;N&lt;/NakedOption&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 30:  Floating leg data</em></p>
+<p>The meanings and allowable values of the elements in the FloatingLegData node follow below.</p>
+<ul>
+<li>Index: The combination of currency, index and term that identifies the relevant fixings and yield curve of the floating leg.<br>
+Allowable values: An alphanumeric string of the form CCY-INDEX-TERM. CCY, INDEX and TERM must be separated by dashes (-). CCY and INDEX must be among the supported currency and index combinations. TERM must be an integer followed by D, W, M or Y. See <a href="#table7">Table 7</a>.</li>
+<li>IsAveraged [Optional]: For cases where there are multiple index fixings over a pe- riod true indicates that the average of the fixings is used to calculate the coupon. false indicates that the coupon is calculated by compounding the fixings. IsAver- aged only applies to Overnight indices and Sub Periods Coupons.<br>
+Allowable values: true, false. Defaults to false if left blank or omitted.</li>
+<li>HasSubPeriods [Optional]: For cases where several Ibor fixings result in a single payment for a period, e.g. if the Ibor tenor is 3M and the schedule tenor is 6M, two fixings are used to compute the amount of the semiannual coupon payments. true indicates that an average (IsAveraged = true) or a compounded (IsAveraged=false) value of the fixings is used to determine the payment rate.<br>
+Allowable values: true, false. Defaults to false if left blank or omitted.</li>
+<li>IncludeSpread [Optional]: Only applies to Sub Periods Coupons. If true the spread is included in the compounding, otherwise it is excluded.<br>
+Allowable values: true, false. Defaults to false if left blank or omitted.</li>
+<li>IsInArrears [Optional]: true indicates that fixing is in arrears, i.e. the fixing gap is calculated in relation to the current period end date.<br>
+false indicates that fixing is in advance, i.e. the fixing gap is calculated in relation to the previous period end date.<br>
+Allowable values: true, false. Defaults to false if left blank or omitted.</li>
+<li>FixingDays [Optional]: This is the fixing gap, i.e. the number of days before the period end date an index fixing is taken.<br>
+Allowable values: Positive integers. Defaults to 0 if left blank or omitted.</li>
+<li>Spreads: This node contains child elements of type Spread. If the spread is con- stant over the life of the floating leg, only one spread value should be entered. If two or more coupons have different spreads, multiple spread values are required, each represented by a Spread child element. The first spread value corresponds to the first coupon, the second spread value corresponds to the second coupon, etc. If the number of coupons exceeds the number of spread values, the spread will be kept flat at the value of last entered spread for the remaining coupons. The number of entered spread values cannot exceed the number of coupons.<br>
+Allowable values: Each child element can take any real number. The spread is expressed in decimal form, e.g. 0.005 is a spread of 0.5% or 50 bp.<br>
+For the section, the same applies as for notionals and rates – a list of changing spreads can be specified without or with individual starte dates as shown in Listing 31.</li>
+</ul>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;Spreads&gt;<br>
+<span class="m15">&lt;Spread&gt;<span style="color: #000000;">0.005</span>&lt;/Spread&gt;</span><br>
+<span class="m15">&lt;SpreadstartDate=’<span style="color: #ff0000;">2017-03-05</span>’&gt;<span style="color: #000000;">0.007</span>&lt;/Spread&gt;</span><br>
+<span class="m15">&lt;SpreadstartDate=’<span style="color: #ff0000;">2019-03-05</span>’&gt;<span style="color: #000000;">0.009</span>&lt;/Spread&gt;</span><br>
+&lt;/Spreads&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 31: ’Dated’ spreads</em></p>
+<ul>
+<li>Gearings [Optional]: This node contains child elements of type Gearing indicating that the coupon rate is multiplied by the given factors. The mode of specification is analogous to spreads, see above.</li>
+<li>Caps [Optional]: This node contains child elements of type Cap indicating that the coupon rate is capped at the given rate (after applying gearing and spread, if any). The mode of specification is analogous to spreads, see above.</li>
+<li>Floors [Optional]: This node contains child elements of type Floor indicating that the coupon rate is floored at the given rate (after applying gearing and spread, if any). The mode of specification is analogous to spreads, see above.</li>
+<li>NakedOption [Optional]: Optional node (defaults to N), if Y the leg represents only the em- bedded floor, cap or collar. By convention these embedded options are considered long if the leg is a receiver leg, otherwise short.</li>
+</ul>
+<h3><a id="legdataamortisation"></a>2.3.6 Leg Data with Amortisation Structures</h3>
+<p>Amortisation structures can (optionally) be added to a leg as indicated in the following listing 32, within a block of information enclosed by &lt;Amortizations&gt; and &lt;/Amortizations&gt; tags.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">…</span>&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">…</span>&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">…</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m30">&lt;Notional&gt;<span style="color: #000000;">10000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;Amortizations&gt;</span><br>
+<span class="m30">&lt;AmortizationData&gt;</span><br>
+<span class="m45">&lt;Type&gt;<span style="color: #000000;">FixedAmount</span>&lt;/Type&gt;</span><br>
+<span class="m45">&lt;Value&gt;<span style="color: #000000;">1000000</span>&lt;/Value&gt;</span><br>
+<span class="m45">&lt;StartDate&gt;<span style="color: #000000;">20170203</span>&lt;/StartDate&gt;</span><br>
+<span class="m45">&lt;Frequency&gt;<span style="color: #000000;">1Y</span>&lt;/Frequency&gt;</span><br>
+<span class="m45">&lt;Underflow&gt;<span style="color: #000000;">false</span>&lt;/Underflow&gt;</span><br>
+<span class="m30">&lt;/AmortizationData&gt;</span><br>
+<span class="m30">&lt;AmortizationData&gt;</span><br>
+<span class="m45" style="color: #000000;">…</span><br>
+<span class="m30">&lt;/AmortizationData&gt;</span><br>
+<span class="m15">&lt;/Amortizations&gt;</span><br>
+<span class="m15" style="color: #000000;">…</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 32: Amortisation data</em></p>
+<p>The user can specify a sequence of AmortizationData items in order to switch from one kind of amortisation to another etc. Within each AmortisationData block the meaning of elements is</p>
+<ul>
+<li>Type: Amortisation type with allowable values FixedAmount, RelativeToInitial- Notional, RelativeToPreviousNotional, Annuity.</li>
+<li>Value: Interpreted depending on Type, see below.</li>
+<li>StartDate: Amortisation starts on first schedule date on or beyond StartDate.</li>
+<li>Frequency, entered as a period: Frequency of amortisations.</li>
+<li>Underflow: Allow amortisation below zero notional if true, otherwise amortisation stops at zero notional.</li>
+</ul>
+<p>The amortisation data block’s Value element is interpreted depending on the chosen Type:</p>
+<ul>
+<li>FixedAmount: The value is interpreted as a notional amount to be subtracted from the current notional on each amortisation date.</li>
+<li>RelativeToInitialNotional: The value is interpreted as a fraction of the initial notional to be subtraced from the current notional on each amortisation date.</li>
+<li>RelativeToPreviousNotional: The value is interpreted as a fraction of the previous notional to be subtraced from the current notional on each amortisation date.</li>
+<li>Annuity: The value is interpreted as annuity amount (redemption plus coupon).</li>
+</ul>
+<p>Annuity type amortisation is supported for fixed rate legs as well as floating (ibor) legs. Note:</p>
+<ul>
+<li>Floating annuities require at least one previous vanilla coupon in order to work out the first amortisation amount.</li>
+<li>Floating legs with annuity amortisation currently do not allow switching the amortisation type, i.e. only a single block of AmortizationData.</li>
+</ul>
+<h3><a id="cmslegdata"></a>2.3.7 CMS Leg Data</h3>
+<p>Listing 33 shows an example for a leg of type CMS.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">CMS</span>&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">GBP</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m30">&lt;Notional&gt;<span style="color: #000000;">10000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;DayCounter&gt;<span style="color: #000000;">ACT/ACT</span>&lt;/DayCounter&gt;</span><br>
+<span class="m15">&lt;PaymentConvention&gt;<span style="color: #000000;">Following</span>&lt;/PaymentConvention&gt;</span><br>
+<span class="m15">&lt;ScheduleData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/ScheduleData&gt;</span><br>
+<span class="m15">&lt;CMSLegData&gt;</span><br>
+<span class="m30">&lt;Index&gt;<span style="color: #000000;">EUR-CMS-10Y</span>&lt;/Index&gt;</span><br>
+<span class="m30">&lt;Spreads&gt;</span><br>
+<span class="m45">&lt;Spread&gt;<span style="color: #000000;">0.0010</span>&lt;/Spread&gt;</span><br>
+<span class="m30">&lt;/Spreads&gt;</span><br>
+<span class="m30">&lt;Gearings&gt;</span><br>
+<span class="m45">&lt;Gearing&gt;<span style="color: #000000;">2.0</span>&lt;/Gearing&gt;</span><br>
+<span class="m30">&lt;/Gearings&gt;</span><br>
+<span class="m30">&lt;Caps&gt;</span><br>
+<span class="m45">&lt;Cap&gt;<span style="color: #000000;">0.05</span>&lt;/Cap&gt;</span><br>
+<span class="m30">&lt;/Caps&gt;</span><br>
+<span class="m30">&lt;Floors&gt;</span><br>
+<span class="m45">&lt;Floor&gt;<span style="color: #000000;">0.01</span>&lt;/Floor&gt;</span><br>
+<span class="m30">&lt;/Floors&gt;</span><br>
+<span class="m15">&lt;/CMSLegData&gt;</span><br>
+<span class="m15">&lt;NakedOption&gt;<span style="color: #000000;">N</span>&lt;/NakedOption&gt;</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 33: CMS leg data</em></p>
+<p>The CMSLegData block contains the following elements:</p>
+<ul>
+<li>Index: The underlying CMS index.</li>
+<li>Spreads: The spreads applied to index fixings. As usual, this can be a single value, a vector of values or a dated vector of values.</li>
+<li>IsInArrears: true indicates that fixing is in arrears, i.e. the fixing gap is calculated in relation to the current period end date.<br>
+false indicates that fixing is in advance, i.e. the fixing gap is calculated in relation to the previous period end date.</li>
+<li>FixingDays: This is the fixing gap, i.e. the number of days before the period end date an index fixing is taken.</li>
+<li>Gearings: This node contains child elements of type Gearing indicating that the coupon rate is multiplied by the given factors. The mode of specification is anal- ogous to spreads, see above.</li>
+<li>Caps: This node contains child elements of type Cap indicating that the coupon rate is capped at the given rate (after applying gearing and spread, if any). The mode of specification is analogous to spreads, see above.</li>
+<li>Floors: This node contains child elements of type Floor indicating that the coupon rate is floored at the given rate (after applying gearing and spread, if any). The mode of specification is analogous to spreads, see above.</li>
+<li>NakedOption: Optional node (defaults to N), if Y the leg represents only the em- bedded floor, cap or collar. By convention these embedded options are considered long if the leg is a receiver leg, otherwise short.</li>
+</ul>
+<h3><a id="cmsspread"></a>2.3.8 CMS Spread Leg Data</h3>
+<p>Listing 34 shows an example for a leg of type CMSSpread.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">CMSSpread</span>&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">GBP</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m30">&lt;Notional&gt;<span style="color: #000000;">10000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;DayCounter&gt;<span style="color: #000000;">ACT/ACT</span>&lt;/DayCounter&gt;</span><br>
+<span class="m15">&lt;PaymentConvention&gt;<span style="color: #000000;">Following</span>&lt;/PaymentConvention&gt;</span><br>
+<span class="m15">&lt;ScheduleData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/ScheduleData&gt;</span><br>
+<span class="m15">&lt;CMSSpreadLegData&gt;</span><br>
+<span class="m30">&lt;Index1&gt;<span style="color: #000000;">EUR-CMS-10Y</span>&lt;/Index1&gt;</span><br>
+<span class="m30">&lt;Index2&gt;<span style="color: #000000;">EUR-CMS-2Y</span>&lt;/Index2&gt;</span><br>
+<span class="m30">&lt;Spreads&gt;</span><br>
+<span class="m45">&lt;Spread&gt;<span style="color: #000000;">0.0010</span>&lt;/Spread&gt;</span><br>
+<span class="m30">&lt;/Spreads&gt;</span><br>
+<span class="m30">&lt;Gearings&gt;</span><br>
+<span class="m45">&lt;Gearing&gt;<span style="color: #000000;">8.0</span>&lt;/Gearing&gt;</span><br>
+<span class="m30">&lt;/Gearings&gt;</span><br>
+<span class="m30">&lt;Caps&gt;</span><br>
+<span class="m45">&lt;Cap&gt;<span style="color: #000000;">0.05</span>&lt;/Cap&gt;</span><br>
+<span class="m30">&lt;/Caps&gt;</span><br>
+<span class="m30">&lt;Floors&gt;</span><br>
+<span class="m45">&lt;Floor&gt;<span style="color: #000000;">0.01</span>&lt;/Floor&gt;</span><br>
+<span class="m30">&lt;/Floors&gt;</span><br>
+<span class="m15">&lt;/CMSSpreadLegData&gt;</span><br>
+<span class="m15">&lt;NakedOption&gt;N&lt;/NakedOption&gt;</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 34: CMS Spread leg data</em></p>
+<p>The elements of the CMSSpreadLegData block are identical to those of the CMSLegData (see <a href="#cmslegdata">2.3.7</a>), except for the index which is defined by two CMS indices as the difference between Index1 and Index2.</p>
+<h3><a id="digitalcmsspread"></a>2.3.9 Digital CMS Spread Leg Data</h3>
+<p>Listing 35 shows an example for a leg of type DigitalCMSSpread.</p>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">DigitalCMSSpread</span>&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">GBP</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m30">&lt;Notional&gt;<span style="color: #000000;">10000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;DayCounter&gt;<span style="color: #000000;">ACT/ACT</span>&lt;/DayCounter&gt;</span><br>
+<span class="m15">&lt;PaymentConvention&gt;<span style="color: #000000;">Following</span>&lt;/PaymentConvention&gt;</span><br>
+<span class="m15">&lt;ScheduleData&gt;</span><br>
+<span class="m30" style="color: #000000;">…</span><br>
+<span class="m15">&lt;/ScheduleData&gt;</span><br>
+<span class="m15">&lt;DigitalCMSSpreadLegData&gt;</span><br>
+<span class="m30">&lt;CMSSpreadLegData&gt;</span><br>
+<span class="m45">&lt;Index1&gt;<span style="color: #000000;">EUR-CMS-10Y</span>&lt;/Index1&gt;</span><br>
+<span class="m45">&lt;Index2&gt;<span style="color: #000000;">EUR-CMS-2Y</span>&lt;/Index2&gt;</span><br>
+<span class="m45">&lt;Spreads&gt;</span><br>
+<span class="m60">&lt;Spread&gt;<span style="color: #000000;">0.0010</span>&lt;/Spread&gt;</span><br>
+<span class="m45">&lt;/Spreads&gt;</span><br>
+<span class="m45">&lt;Gearings&gt;</span><br>
+<span class="m60">&lt;Gearing&gt;<span style="color: #000000;">8.0</span>&lt;/Gearing&gt;</span><br>
+<span class="m45">&lt;/Gearings&gt;</span><br>
+<span class="m45">&lt;NakedOption&gt;<span style="color: #000000;">N</span>&lt;/NakedOption&gt;</span><br>
+<span class="m30">&lt;/CMSSpreadLegData&gt;</span><br>
+<span class="m30">&lt;CallPosition&gt;<span style="color: #000000;">Long</span>&lt;/CallPosition&gt;</span><br>
+<span class="m30">&lt;IsCallATMIncluded&gt;<span style="color: #000000;">false</span>&lt;/IsCallATMIncluded&gt;</span><br>
+<span class="m30">&lt;CallStrikes&gt;</span><br>
+<span class="m60">&lt;Strike&gt;<span style="color: #000000;">0.0001</span>&lt;/Strike&gt;</span><br>
+<span class="m30">&lt;/CallStrikes&gt;</span><br>
+<span class="m30">&lt;CallPayoffs&gt;</span><br>
+<span class="m60">&lt;Payoff&gt;<span style="color: #000000;">0.0001</span>&lt;/Payoff&gt;</span><br>
+<span class="m30">&lt;/CallPayoffs&gt;</span><br>
+<span class="m30">&lt;PutPosition&gt;<span style="color: #000000;">Long</span>&lt;/PutPosition&gt;</span><br>
+<span class="m30">&lt;IsPutATMIncluded&gt;<span style="color: #000000;">false</span>&lt;/IsPutATMIncluded&gt;</span><br>
+<span class="m30">&lt;PutStrikes&gt;</span><br>
+<span class="m60">&lt;Strike&gt;<span style="color: #000000;">0.001</span>&lt;/Strike&gt;</span><br>
+<span class="m30">&lt;/PutStrikes&gt;</span><br>
+<span class="m30">&lt;PutPayoffs&gt;</span><br>
+<span class="m60">&lt;Payoff&gt;<span style="color: #000000;">0.001</span>&lt;/Payoff&gt;</span><br>
+<span class="m30">&lt;/PutPayoffs&gt;</span><br>
+<span class="m15">&lt;/DigitalCMSSpreadLegData&gt;</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 35: Digital CMS Spread leg data</em></p>
+<p>The DigitalCMSLegData block contains the following elements:</p>
+<ul>
+<li>DigitalCMSLegData: a DigitalCMSSpreadLegData block describing the underly- ing digital cms spread leg (see <a href="#digitalcmsspread">2.3.9.</a>)</li>
+<li>CallPosition: Specifies whether the call option position is long or short.</li>
+<li>IsCallATMIncluded: inclusion flag on the call payoff if the call option ends at-the-money</li>
+<li>CallStrikes: strike rate for the the call option</li>
+<li>CallPayoffs: digital call option payoff rate. If included the option is cash-or-nothing, if excluded the option is asset-or-nothing</li>
+<li>PutPosition: Specifies whether the put option position is long or short.</li>
+<li>IsPutATMIncluded: inclusion flag on the put payoff if the put option ends at-the-money</li>
+<li>PutStrikes: strike rate for the the put option</li>
+<li>PutPayoffs: digital put option payoff rate. If included the option is cash-or- nothing, if excluded the option is asset-or-nothing</li>
+</ul>
+<h3><a id="equitylegdata"></a>2.3.10 Equity Leg Data</h3>
+<p>Listing 36 shows an example of a leg of type Equity. The EquityLegData block contains the following elements:</p>
+<ul>
+<li>ReturnType: Price indicates that the coupons on the equity leg are determined by the price movement of the underlying equity, whereas Total indicates that coupons are determined by the total return of the underlying equity including dividends.<br>
+Allowable values: Price or Total</li>
+<li>Name: The identifier of the underlying equity or equity index.<br>
+Allowable values: Any string (provided it is an ID of an equity in the market configuration). Typically an ISIN-code with the ISIN: prefix.</li>
+<li>InitialPrice [Optional]: Initial Price of the equity, if not present, the first valuation date is used to determine the initial price.<br>
+Allowable values: Any positive real number</li>
+<li>NotionalReset [Optional]: Defaults to false. If set to true, the Notional is reset at the beginning of each coupon period. Notional resets only affect the equity leg.<br>
+Allowable values: true or false</li>
+<li>DividendFactor [Optional]: Factor of dividend to be included in return. Note that the DividendFactor is only relevant when the ReturnType is set to Total. It is not used if the ReturnType is set to Price.<br>
+Allowable values: 0 ≤ DividendFactor ≤ 1. Defaults to 1 if left blank or omitted.</li>
+<li>ValuationSchedule [Optional]: Schedule of dates for equity valuation.<br>
+Allowable values: A node on the same form as ScheduleData, (see <a href="#scheduledata">2.3.3</a>). If omitted, equity valuation dates follow the schedule of the equity leg adjusted for FixingDays.</li>
+<li>FixingDays [Optional]: The number of days before payment date for equity valu- ation. N.B. Only used when no valuation schedule present. Defaults to 0.</li>
+</ul>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">Equity</span>&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">EUR</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m30">&lt;Notional&gt;<span style="color: #000000;">10000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;DayCounter&gt;<span style="color: #000000;">ACT/ACT</span>&lt;/DayCounter&gt;</span><br>
+<span class="m15">&lt;PaymentConvention&gt;<span style="color: #000000;">Following</span>&lt;/PaymentConvention&gt;</span><br>
+<span class="m15">&lt;ScheduleData&gt;</span><br>
+<span class="m30">&lt;Rules&gt;</span><br>
+<span class="m45">&lt;StartDate&gt;<span style="color: #000000;">2016-03-01</span>&lt;/StartDate&gt;</span><br>
+<span class="m45">&lt;EndDate&gt;<span style="color: #000000;">2018-03-01</span>&lt;/EndDate&gt;</span><br>
+<span class="m45">&lt;Tenor&gt;<span style="color: #000000;">3M</span>&lt;/Tenor&gt;</span><br>
+<span class="m45">&lt;Calendar&gt;<span style="color: #000000;">TARGET</span>&lt;/Calendar&gt;</span><br>
+<span class="m45">&lt;Convention&gt;<span style="color: #000000;">ModifiedFollowing</span>&lt;/Convention&gt;</span><br>
+<span class="m45">&lt;TermConvention&gt;<span style="color: #000000;">ModifiedFollowing</span>&lt;/TermConvention&gt;</span><br>
+<span class="m45">&lt;Rule&gt;<span style="color: #000000;">Forward</span>&lt;/Rule&gt;</span><br>
+<span class="m45">&lt;EndOfMonth/&gt;</span><br>
+<span class="m45">&lt;FirstDate/&gt;</span><br>
+<span class="m45">&lt;LastDate/&gt;</span><br>
+<span class="m30">&lt;/Rules&gt;</span><br>
+<span class="m15">&lt;/ScheduleData&gt;</span><br>
+<span class="m15">&lt;EquityLegData&gt;</span><br>
+<span class="m30">&lt;ReturnType&gt;<span style="color: #000000;">Price</span>&lt;/ReturnType&gt;</span><br>
+<span class="m30">&lt;Name&gt;<span style="color: #000000;">ISIN:US78378X1072</span>&lt;/Name&gt;</span><br>
+<span class="m30">&lt;InitialPrice&gt;<span style="color: #000000;">100</span>&lt;/InitialPrice&gt;</span><br>
+<span class="m30">&lt;NotionalReset&gt;<span style="color: #000000;">true</span>&lt;/NotionalReset&gt;</span><br>
+<span class="m30">&lt;DividendFactor&gt;<span style="color: #000000;">1</span>&lt;/DividendFactor&gt;</span><br>
+<span class="m30">&lt;ValuationSchedule&gt;</span><br>
+<span class="m45">&lt;Dates&gt;</span><br>
+<span class="m60">&lt;Calendar&gt;<span style="color: #000000;">USD</span>&lt;/Calendar&gt;</span><br>
+<span class="m60">&lt;Convention&gt;<span style="color: #000000;">ModifiedFollowing</span>&lt;/Convention&gt;</span><br>
+<span class="m60">&lt;Dates&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2016-03-01</span>&lt;/Date&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2016-06-01</span>&lt;/Date&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2016-09-01</span>&lt;/Date&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2016-12-01</span>&lt;/Date&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2017-03-01</span>&lt;/Date&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2017-06-01</span>&lt;/Date&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2017-09-01</span>&lt;/Date&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2017-12-01</span>&lt;/Date&gt;</span><br>
+<span class="m75">&lt;Date&gt;<span style="color: #000000;">2018-03-01</span>&lt;/Date&gt;</span><br>
+<span class="m60">&lt;/Dates&gt;</span><br>
+<span class="m45">&lt;/Dates&gt;</span><br>
+<span class="m30">&lt;/ValuationSchedule&gt;</span><br>
+<span class="m30">&lt;FixingDays&gt;<span style="color: #000000;">0</span>&lt;/FixingDays&gt;</span><br>
+<span class="m15">&lt;/EquityLegData&gt;</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 36: Equity Leg Data</em></p>
+<h3><a id="cpileg"></a>2.3.11 CPI Leg Data</h3>
+<p>Listing 37 shows an example for a leg of type CPI. The CPILegData block contains the following elements:</p>
+<ul>
+<li>Index: The underlying zero inflation index.<br>
+Allowable values: Any string (provided it is the ID of an inflation index in the market configuration).</li>
+<li>Rates: The fixed rate(s) of the leg. As usual, this can be a single value, a vector of values or a dated vector of values.<br>
+Allowable values: Each rate element can take any real number. The rate is ex- pressed in decimal form, e.g. 0.05 is a rate of 5%.</li>
+<li>BaseCPI: The base CPI used to determine the lifting factor for the fixed coupons.<br>
+Allowable values: Any positive real number.</li>
+<li>ObservationLag: The observation lag to be applied.<br>
+Allowable values: An integer followed by <em>D, W, M or Y</em>. Interpolation lags are typically expressed in <em>M</em>, months.</li>
+<li>Interpolated: A flag indicating whether interpolation should be applied to inflation fixings.<br>
+Allowable values: <em>true, false</em></li>
+<li>SubtractInflationNotional [Optional]: A flag indicating whether the non-inflation adjusted notional amount should be subtracted from the the final inflation-adjusted notional exchange at maturity. Note that the final coupon payment is not affected by this flag.<br>
+Allowable values: true, false<br>
+Defaults to <em>false</em> if left blank or omitted.</li>
+</ul>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;CPI&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Payer&gt;false&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;Currency&gt;GBP&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m15">&lt;Notional&gt;10000000&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;DayCounter&gt;ACT/ACT&lt;/DayCounter&gt;</span><br>
+<span class="m15">&lt;PaymentConvention&gt;Following&lt;/PaymentConvention&gt;</span><br>
+<span class="m15">&lt;ScheduleData&gt;</span><br>
+<span class="m15">&lt;Rules&gt;</span><br>
+<span class="m15">&lt;StartDate&gt;2016-07-18&lt;/StartDate&gt;</span><br>
+<span class="m15">&lt;EndDate&gt;2021-07-18&lt;/EndDate&gt;</span><br>
+<span class="m15">&lt;Tenor&gt;1Y&lt;/Tenor&gt;</span><br>
+<span class="m15">&lt;Calendar&gt;UK&lt;/Calendar&gt;</span><br>
+<span class="m15">&lt;Convention&gt;ModifiedFollowing&lt;/Convention&gt;</span><br>
+<span class="m15">&lt;TermConvention&gt;ModifiedFollowing&lt;/TermConvention&gt;</span><br>
+<span class="m15">&lt;Rule&gt;Forward&lt;/Rule&gt;</span><br>
+<span class="m15">&lt;EndOfMonth/&gt;</span><br>
+<span class="m15">&lt;FirstDate/&gt;</span><br>
+<span class="m15">&lt;LastDate/&gt;</span><br>
+<span class="m15">&lt;/Rules&gt;</span><br>
+<span class="m15">&lt;/ScheduleData&gt;</span><br>
+<span class="m15">&lt;CPILegData&gt;</span><br>
+<span class="m15">&lt;Index&gt;UKRPI&lt;/Index&gt;</span><br>
+<span class="m15">&lt;Rates&gt;</span><br>
+<span class="m15">&lt;Rate&gt;0.02&lt;/Rate&gt;</span><br>
+<span class="m15">&lt;/Rates&gt;</span><br>
+<span class="m15">&lt;BaseCPI&gt;210&lt;/BaseCPI&gt;</span><br>
+<span class="m15">&lt;ObservationLag&gt;2M&lt;/ObservationLag&gt;</span><br>
+<span class="m15">&lt;Interpolated&gt;false&lt;/Interpolated&gt;</span><br>
+<span class="m15">&lt;/CPILegData&gt;</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 37: CPI Leg Data</em></p>
+<h3><a id="yylegdata"></a>2.3.12 YY Leg Data</h3>
+<p>Listing 38 shows an example for a leg of type YY. The YYLegData block contains the following elements:</p>
+<ul>
+<li>Index: The underlying zero inflation index.<br>
+Allowable values: Any string (provided it is the ID of an inflation index in the market configuration).</li>
+<li>FixingDays: The number of fixing days.<br>
+Allowable values: An integer followed by D</li>
+<li>ObservationLag: The observation lag to be applied.<br>
+Allowable values: An integer followed by D, W, M or Y. Interpolation lags are typically expressed in M, months.</li>
+<li>Caps: This node contains child elements of type Cap indicating that the coupon rate is capped at the given rate (after applying gearing and spread, if any).</li>
+<li>Floors: This node contains child elements of type Floor indicating that the coupon rate is floored at the given rate (after applying gearing and spread, if any).</li>
+<li>NakedOption [Optional]: Optional node (defaults to N), if Y the leg represents only the embedded floor, cap or collar. By convention these embedded options are considered long if the leg is a receiver leg, otherwise short.</li>
+</ul>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">YY</span>&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">EUR</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m30">&lt;Notional&gt;<span style="color: #000000;">10000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;DayCounter&gt;<span style="color: #000000;">ACT/ACT</span>&lt;/DayCounter&gt;</span><br>
+<span class="m15">&lt;PaymentConvention&gt;<span style="color: #000000;">Following</span>&lt;/PaymentConvention&gt;</span><br>
+<span class="m15">&lt;ScheduleData&gt;</span><br>
+<span class="m30">&lt;Rules&gt;</span><br>
+<span class="m45">&lt;StartDate&gt;<span style="color: #000000;">2016-07-18</span>&lt;/StartDate&gt;</span><br>
+<span class="m45">&lt;EndDate&gt;<span style="color: #000000;">2021-07-18</span>&lt;/EndDate&gt;</span><br>
+<span class="m45">&lt;Tenor&gt;<span style="color: #000000;">1Y</span>&lt;/Tenor&gt;</span><br>
+<span class="m45">&lt;Calendar&gt;<span style="color: #000000;">UK</span>&lt;/Calendar&gt;</span><br>
+<span class="m45">&lt;Convention&gt;<span style="color: #000000;">ModifiedFollowing</span>&lt;/Convention&gt;</span><br>
+<span class="m45">&lt;TermConvention&gt;<span style="color: #000000;">ModifiedFollowing</span>&lt;/TermConvention&gt;</span><br>
+<span class="m45">&lt;Rule&gt;<span style="color: #000000;">Forward</span>&lt;/Rule&gt;</span><br>
+<span class="m45">&lt;EndOfMonth/&gt;</span><br>
+<span class="m45">&lt;FirstDate/&gt;</span><br>
+<span class="m45">&lt;LastDate/&gt;</span><br>
+<span class="m15">&lt;/Rules&gt;</span><br>
+<span class="m15">&lt;/ScheduleData&gt;</span><br>
+<span class="m15">&lt;YYLegData&gt;</span><br>
+<span class="m30">&lt;Index&gt;<span style="color: #000000;">EUHICPXT</span>&lt;/Index&gt;</span><br>
+<span class="m30">&lt;FixingDays&gt;<span style="color: #000000;">2</span>&lt;/FixingDays&gt;</span><br>
+<span class="m30">&lt;ObservationLag&gt;<span style="color: #000000;">2M</span>&lt;/ObservationLag&gt;</span><br>
+<span class="m30">&lt;Interpolated&gt;<span style="color: #000000;">true</span>&lt;/Interpolated&gt;</span><br>
+<span class="m30">&lt;Caps&gt;</span><br>
+<span class="m45">&lt;Cap&gt;<span style="color: #000000;">0.05</span>&lt;/Cap&gt;</span><br>
+<span class="m30">&lt;/Caps&gt;</span><br>
+<span class="m30">&lt;Floors&gt;</span><br>
+<span class="m45">&lt;Floor&gt;<span style="color: #000000;">0.01</span>&lt;/Floor&gt;</span><br>
+<span class="m30">&lt;/Floors&gt;</span><br>
+<span class="m30">&lt;NakedOption&gt;<span style="color: #000000;">N</span>&lt;/NakedOption&gt;</span><br>
+<span class="m15">&lt;/YYLegData&gt;</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 38: YY Leg Data</em></p>
+<p> </p>
+<h3><a id="zerocouponsfixed"></a>2.3.13 ZeroCouponFixed Leg Data</h3>
+<p>Listing 39 shows an example for a leg of type Zero Coupon Fixed. The ZeroCoupon- FixedLegData block contains the following elements:</p>
+<ul>
+<li>Rates: The fixed real rate(s) of the leg. While this can be a single value, a vector of values or a dated vector of values, the current ZeroCouponFixed leg requires only a single rate value to be passed.<br>
+Allowable values: Each rate element can take any real number. The rate is ex- pressed in decimal form, e.g. 0.05 is a rate of 5%.</li>
+<li>Compounding: The method of compounding applied to the rate.<br>
+Allowable values: ’Simple’ i.e. (1 + r * t), or ’Compounded’ i.e. (1 + r)ˆt</li>
+</ul>
+<table class="full_width">
+<tbody>
+<tr class="code_snp">
+<td>&lt;LegData&gt;<br>
+<span class="m15">&lt;LegType&gt;<span style="color: #000000;">ZeroCouponFixed</span>&lt;/LegType&gt;</span><br>
+<span class="m15">&lt;Payer&gt;<span style="color: #000000;">false</span>&lt;/Payer&gt;</span><br>
+<span class="m15">&lt;Currency&gt;<span style="color: #000000;">EUR</span>&lt;/Currency&gt;</span><br>
+<span class="m15">&lt;Notionals&gt;</span><br>
+<span class="m30">&lt;Notional&gt;<span style="color: #000000;">10000000</span>&lt;/Notional&gt;</span><br>
+<span class="m15">&lt;/Notionals&gt;</span><br>
+<span class="m15">&lt;DayCounter&gt;<span style="color: #000000;">ACT/ACT</span>&lt;/DayCounter&gt;</span><br>
+<span class="m15">&lt;PaymentConvention&gt;<span style="color: #000000;">Following</span>&lt;/PaymentConvention&gt;</span><br>
+<span class="m15">&lt;ScheduleData&gt;</span><br>
+<span class="m30">&lt;Rules&gt;</span><br>
+<span class="m45">&lt;StartDate&gt;<span style="color: #000000;">2016-07-18</span>&lt;/StartDate&gt;</span><br>
+<span class="m45">&lt;EndDate&gt;<span style="color: #000000;">2021-07-18</span>&lt;/EndDate&gt;</span><br>
+<span class="m45">&lt;Tenor&gt;<span style="color: #000000;">5Y</span>&lt;/Tenor&gt;</span><br>
+<span class="m45">&lt;Calendar&gt;<span style="color: #000000;">UK</span>&lt;/Calendar&gt;</span><br>
+<span class="m15">&lt;Convention&gt;<span style="color: #000000;">ModifiedFollowing</span>&lt;/Convention&gt;</span><br>
+<span class="m45">&lt;TermConvention&gt;<span style="color: #000000;">ModifiedFollowing</span>&lt;/TermConvention&gt;</span><br>
+<span class="m45">&lt;Rule&gt;<span style="color: #000000;">Forward</span>&lt;/Rule&gt;</span><br>
+<span class="m45">&lt;EndOfMonth/&gt;</span><br>
+<span class="m45">&lt;FirstDate/&gt;</span><br>
+<span class="m45">&lt;LastDate/&gt;</span><br>
+<span class="m30">&lt;/Rules&gt;</span><br>
+<span class="m15">&lt;/ScheduleData&gt;</span><br>
+<span class="m15">&lt;ZeroCouponFixedLegData&gt;</span><br>
+<span class="m30">&lt;Rates&gt;</span><br>
+<span class="m45">&lt;Rate&gt;<span style="color: #000000;">0.02</span>&lt;/Rate&gt;</span><br>
+<span class="m30">&lt;/Rates&gt;</span><br>
+<span class="m30">&lt;Compounding&gt;<span style="color: #000000;">Simple</span>&lt;/Compounding&gt;</span><br>
+<span class="m15">&lt;/ZeroCouponFixedLegData&gt;</span><br>
+&lt;/LegData&gt;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Listing 39: ZeroCouponFixed leg data</em></p>
+<p> </p>
+<h3><a id="allowable"></a><a id="table4"></a>2.4 Allowable Values for Standard Trade Data</h3>
+<table class="full_width">
+<tbody>
+<tr>
+<td><strong>Trade Data</strong></td>
+<td><strong>Allowable Values</strong></td>
+</tr>
+<tr>
+<td>Date</td>
+<td>The following date formats are supported:<br>
+<em>yyyymmdd</em><br>
+<em>yyyy-mm-dd</em><br>
+<em>yyyy/mm/dd</em><br>
+<em>yyyy.mm.dd</em><br>
+<em>dd-mm-yy</em><br>
+<em>dd/mm/yy</em><br>
+<em>dd.mm.yy</em><br>
+<em>dd-mm-yyyy</em><br>
+<em>dd/mm/yyyy</em><br>
+<em>dd.mm.yyyy</em><br>
+and<br>
+Dates as serial numbers, comparable to Microsoft Excel dates, with a minimum of 367 for Jan 1, 1901, and a maximum of 109574 for Dec 31, 2199.</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td><em>ATS, AUD, BEF, BRL, CAD, CHF, CNY, CZK, DEM, DKK, EUR, ESP, FIM, FRF, GBP, GRD, HKD, HUF, IEP, ITL, INR, ISK, JPY, KRW, LUF, NLG, NOK, NZD, PLN, PTE, RON, SEK, SGD, THB, TRY, TWD, USD, ZAR, ARS, CLP, COP, IDR, ILS, KWD, PEN, MXN, SAR, RUB, TND, MYR, UAH, KZT, QAR, MXV, CLF, EGP, BHD, OMR, VND, AED, PHP, NGN, MAD</em>, Note: Currency codes must also match available currencies in the simulation.xml file.</td>
+</tr>
+<tr>
+<td>Roll Convention</td>
+<td><em>F, Following, FOLLOWING</em><br>
+<em>MF, ModifiedFollowing, Modified Following, MODIFIED P, Preceding, PRECEDING</em><br>
+<em>MP, ModifiedPreceding, Modified Preceding, MODIFIED U, Unadjusted, INDIFF</em></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Table 4: Allowable values for standard trade data.</em></p>
+<p> <a id="table5"></a></p>
+<h1></h1>
+<p> </p>
+<table class="full_width">
+<tbody>
+<tr>
+<td>Calendar</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Allowable Values</strong></td>
+<td><strong>Resulting Calendar</strong></td>
+</tr>
+<tr>
+<td><em>TARGET, TGT, EUR</em></td>
+<td>Target Calendar</td>
+</tr>
+<tr>
+<td><em>CA, TRB, CAD</em></td>
+<td>Canada Calendar</td>
+</tr>
+<tr>
+<td><em>TKB, JP, JPY</em></td>
+<td>Japan Calendar</td>
+</tr>
+<tr>
+<td><em>ZUB, CHF</em></td>
+<td>Switzerland Calendar</td>
+</tr>
+<tr>
+<td><em>GB, LNB, UK</em></td>
+<td>UK Calendar</td>
+</tr>
+<tr>
+<td><em>London stock exchange</em></td>
+<td>London Stock Exchange Calendar</td>
+</tr>
+<tr>
+<td><em>US, NYB, USD</em></td>
+<td>US Calendar</td>
+</tr>
+<tr>
+<td><em>US-SET</em></td>
+<td>US Settlement Calendar</td>
+</tr>
+<tr>
+<td><em>US-GOV</em></td>
+<td>US Government Bond Calendar</td>
+</tr>
+<tr>
+<td><em>US-NYSE, New York stock exchange</em></td>
+<td>US NYSE Calendar</td>
+</tr>
+<tr>
+<td><em>US with Libor impact</em></td>
+<td>US Calendar for Libor fixings</td>
+</tr>
+<tr>
+<td><em>US-NERC</em></td>
+<td>US NERC Calendar</td>
+</tr>
+<tr>
+<td><em>AU</em>, <em>AUD</em></td>
+<td>Australia Calendar</td>
+</tr>
+<tr>
+<td><em>SA</em>, <em>ZAR</em></td>
+<td>South Africa Calendar</td>
+</tr>
+<tr>
+<td><em>SS</em>, <em>SEK</em></td>
+<td>Sweden Calendar</td>
+</tr>
+<tr>
+<td><em>ARS</em></td>
+<td>Brazil Calendar</td>
+</tr>
+<tr>
+<td><em>BRL</em></td>
+<td>Brazil Calendar</td>
+</tr>
+<tr>
+<td><em>CNY</em></td>
+<td>China Calendar</td>
+</tr>
+<tr>
+<td><em>CZK</em></td>
+<td>Czech Republic Calendar</td>
+</tr>
+<tr>
+<td><em>DEN</em>, <em>DKK</em></td>
+<td>Denmark Calendar</td>
+</tr>
+<tr>
+<td><em>FIN</em></td>
+<td>Finland Calendar</td>
+</tr>
+<tr>
+<td><em>HKD</em></td>
+<td>HongKong Calendar</td>
+</tr>
+<tr>
+<td><em>ISK</em></td>
+<td>Iceland Calendar</td>
+</tr>
+<tr>
+<td><em>INR</em></td>
+<td>India Calendar</td>
+</tr>
+<tr>
+<td><em>IDR</em></td>
+<td>Indonesia Calendar</td>
+</tr>
+<tr>
+<td><em>MXN</em></td>
+<td>Mexico Calendar</td>
+</tr>
+<tr>
+<td><em>NZD</em></td>
+<td>New Zealand Calendar</td>
+</tr>
+<tr>
+<td><em>NOK</em></td>
+<td>Norway Calendar</td>
+</tr>
+<tr>
+<td><em>PLN</em></td>
+<td>Poland Calendar</td>
+</tr>
+<tr>
+<td><em>RUB</em></td>
+<td>Russia Calendar</td>
+</tr>
+<tr>
+<td><em>SAR</em></td>
+<td>Saudi Arabia</td>
+</tr>
+<tr>
+<td><em>SGD</em></td>
+<td>Singapore Calendar</td>
+</tr>
+<tr>
+<td><em>KRW</em></td>
+<td>South Korea Calendar</td>
+</tr>
+<tr>
+<td><em>TWD</em></td>
+<td>Taiwan Calendar</td>
+</tr>
+<tr>
+<td><em>TRY</em></td>
+<td>Turkey Calendar</td>
+</tr>
+<tr>
+<td><em>UAH</em></td>
+<td>Ukraine Calendar</td>
+</tr>
+<tr>
+<td><em>WeekendsOnly</em></td>
+<td>Weekends Only Calendar</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Table 5: Allowable Values for Calendar. Combinations of up to four calendars can be provided using comma separated calendar names.</em></p>
+<p> <a id="table6"></a></p>
+<h1></h1>
+<p> </p>
+<table class="full_width">
+<tbody>
+<tr>
+<td>DayCount Convention</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Allowable Values</strong></td>
+<td><strong>Resulting DayCount Convention</strong></td>
+</tr>
+<tr>
+<td><em>A360, Actual/360, ACT/360</em></td>
+<td>Actual 360</td>
+</tr>
+<tr>
+<td><em>A365, A365F, Actual/365, Actual/365 (fixed)</em></td>
+<td>Actual 365 Fixed</td>
+</tr>
+<tr>
+<td><em>T360, 30/360, 30/360 (Bond Basis), ACT/nACT</em></td>
+<td>Thirty 360 (US)</td>
+</tr>
+<tr>
+<td><em>30E/360, 30E/360 (Eurobond Basis)</em></td>
+<td>Thirty 360 (European)</td>
+</tr>
+<tr>
+<td><em>30/360 (Italian)</em></td>
+<td>Thirty 360 (Italian)</td>
+</tr>
+<tr>
+<td><em>ActActISDA, ActualActual (ISDA), ACT/ACT, ACT</em></td>
+<td>Actual Actual (ISDA)</td>
+</tr>
+<tr>
+<td><em>ActActISMA, ActualActual (ISMA)</em></td>
+<td>Actual Actual (ISMA)</td>
+</tr>
+<tr>
+<td><em>ActActAFB, Actual/Actual (AFB)</em></td>
+<td>Actual Actual (AFB)</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Table 6: Allowable Values for DayCount Convention</em></p>
+<p> </p>
+<h1></h1>
+<p> <a id="table7"></a></p>
+<table class="full_width">
+<tbody>
+<tr>
+<td>Index</td>
+<td></td>
+</tr>
+<tr>
+<td>On form CCY-INDEX-TENOR, and matching available indices in the simulation.xml file.</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Index Component</strong></td>
+<td><strong>Allowable Values</strong></td>
+</tr>
+<tr>
+<td>CCY-INDEX</td>
+<td><em>EUR-EONIA</em><br>
+<em>EUR-EURIBOR</em><br>
+<em>EUR-LIBOR</em><br>
+<em>EUR-CMS</em><br>
+<em>USD-FedFunds</em><br>
+<em>USD-LIBOR</em><br>
+<em>USD-SIFMA</em><br>
+<em>USD-CMS</em><br>
+<em>GBP-SONIA</em><br>
+<em>GBP-LIBOR</em><br>
+<em>GBP-CMS</em><br>
+<em>JPY-LIBOR</em><br>
+<em>JPY-TIBOR</em><br>
+<em>JPY-TONAR</em><br>
+<em>JPY-CMS</em><br>
+<em>CHF-LIBOR</em><br>
+<em>CHF-SARON</em><br>
+<em>AUD-LIBOR</em><br>
+<em>AUD-BBSW</em><br>
+<em>CAD-CDOR</em><br>
+<em>CAD-BA</em><br>
+<em>SEK-STIBOR</em><br>
+<em>SEK-LIBOR</em><br>
+<em>DKK-LIBOR</em><br>
+<em>DKK-CIBOR</em><br>
+<em>SGD-SIBOR</em><br>
+<em>SGD-SOR</em><br>
+<em>HKD-HIBOR</em><br>
+<em>NOK-NIBOR</em><br>
+<em>HUF-BUBOR</em><br>
+<em>IDR-IDRFIX</em><br>
+<em>INR-MIFOR</em><br>
+<em>MXN-TIIE</em><br>
+<em>PLN-WIBOR</em><br>
+<em>SKK-BRIBOR</em><br>
+<em>NZD-BKBM</em></td>
+</tr>
+<tr>
+<td>TENOR</td>
+<td>An integer followed by <em>D, W, M or Y</em></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center; font-size: 12px;"><em>Table 7: Allowable values for Index.</em></p>
+			</div>
+</article><!-- #post-## -->
+								</div>
+</section>
+<!-- End Page Section -->
+	<!-- Foter -->
+<div class="row vc_row-fluid" style="background-color: #026d95; margin: 0px 0 0 0 !important;"><center><h3><br>
+	<a href="https://solutions.lseg.com/OREMailingList" title="button" target="_blank" class="btn btn-custom-61eea97c85a47 btn-mod  btn-small btn-solid btn-round"> Sign up to hear about the latest ORE developments</a>
+	<br><br></h3></center></div>
+<footer class="small-section bg-gray-lighter footer pb-60">
+		<div class="container">
+			
+						
+				<!-- Footer Widgets -->
+				<div class="row align-left">
+					<div class="col-sm-6 col-md-3">
+													<div id="text-2" class="widget widget_text"><h5 class="widget-title font-alt">About</h5>			<div class="textwidget"><p><img src="/wp-content/uploads/2016/10/footer_logo.png" width="200" height="80" alt="Open Source Risk Engine - Open Source Risk Analytics"></p>
+<p>The Open Source Risk Engine’s objective is to offer open source as the basis for risk modelling and analytics at financial institutions.  It grew from work developed on QuantLib by market professionals and academics.  ORE wants to take this to the next level.</p>
+</div>
+		</div>											</div>
+					<div class="col-sm-6 col-md-3">
+													<div id="nav_menu-2" class="widget widget_nav_menu"><h5 class="widget-title font-alt">Quick Links</h5><div class="menu-main-container"><ul id="menu-main" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-3433"><a href="/">Home</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3683"><a href="https://github.com/OpenSourceRisk">View On Github</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3658"><a href="/documentation/">Documentation</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3595"><a href="/faqs/">FAQs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3659"><a href="/roadmap/">Roadmap</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7207"><a href="/learning/">Learning</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3673"><a href="/contributions/">Contributions</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7243"><a target="_blank" href="https://github.com/OpenSourceRisk/Engine/discussions">Discussion</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3661"><a href="/license/">License</a></li>
+</ul></div></div>											</div>
+					<div class="col-sm-6 col-md-3">
+													<div id="text-4" class="widget widget_text"><h5 class="widget-title font-alt">License</h5>			<div class="textwidget"><small>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met :
+
+    Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+
+    Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.    
+
+Neither the names of the copyright holders nor the names of the Open Source Risk Engine
+    Group or its contributors may be used to endorse or promote products
+    derived from this software without specific prior written permission.</small>
+</div>
+		</div>											</div>
+					<div class="col-sm-6 col-md-3">
+													<div id="text-3" class="widget widget_text"><h5 class="widget-title font-alt">Copyright</h5>			<div class="textwidget"><p>Copyright © LSEG Post Trade Solutions 2025. All rights reserved. Copyright © AcadiaSoft, Inc. 2025. All rights reserved. Acadia is a registered trademark of AcadiaSoft, Inc., an LSEG business. All rights reserved.</p>
+<p>This website uses <a title="/cookie-policy/" href="/cookie-policy/">Cookies</a>. Continued use of the site will be deemed as your acceptance of this necessity. LSEG Post Trade Solutions <a title="/cookie-policy/" href="/cookie-policy/"><b>respects your privacy</b></a> and never collects personally identifiable information. Please read our <a title="/terms-and-conditions/" href="/terms-and-conditions/">Terms of Use</a> and <a title="/cookie-policy/" href="/cookie-policy/">Privacy Policy</a>.</p>
+</div>
+		</div>											</div>
+				</div>
+				<!-- End Footer Widgets -->
+
+				<!-- Divider -->
+				<hr class="mt-0 mb-30 mb-xs-40 black">
+				<!-- End Divider -->
+						
+							
+				<!-- Footer Logo -->
+								<!-- End Footer Logo -->
+				
+				<!-- Footer Text -->
+				<div class="footer-text">
+					<div class="footer-copy font-alt">
+											</div>
+					<div class="footer-made">
+						This website uses cookies. Continued use of the site will be deemed as your acceptance of the use of cookies.
+© 2016 Open Risk Engine. <a href="http://www.jet.ie/">Website by JET Design</a>					</div>
+				</div>
+				<!-- End Footer Text --> 
+				
+					 </div>
+
+		 <!-- Top Link -->
+		 <div class="local-scroll">
+			 <a href="#top" class="link-to-top"><i class="fa fa-caret-up"></i></a>
+		 </div>
+		 <!-- End Top Link -->
+
+	</footer>
+	<!-- End Foter -->
+</div>
+<!-- End Page Wrap -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-790877-62', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+		<script>
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+		<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/rhythm/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+
+<script type="text/javascript" id="bbp-swap-no-js-body-class">
+	document.body.className = document.body.className.replace( 'bbp-no-js', 'bbp-js' );
+</script>
+
+<script type="text/javascript" src="/wp-content/plugins/revslider/sr6/assets/js/rbtools.min.js" defer async id="tp-tools-js"></script>
+<script type="text/javascript" src="/wp-content/plugins/revslider/sr6/assets/js/rs6.min.js" defer async id="revmin-js"></script>
+<script type="text/javascript" id="google-invisible-recaptcha-js-before">
+/* <![CDATA[ */
+var renderInvisibleReCaptcha = function() {
+
+    for (var i = 0; i < document.forms.length; ++i) {
+        var form = document.forms[i];
+        var holder = form.querySelector('.inv-recaptcha-holder');
+
+        if (null === holder) continue;
+		holder.innerHTML = '';
+
+         (function(frm){
+			var cf7SubmitElm = frm.querySelector('.wpcf7-submit');
+            var holderId = grecaptcha.render(holder,{
+                'sitekey': '6Ld30wAaAAAAAIOlcqyVTrrBup_Uzam6m0Osauhb', 'size': 'invisible', 'badge' : 'bottomright',
+                'callback' : function (recaptchaToken) {
+					if((null !== cf7SubmitElm) && (typeof jQuery != 'undefined')){jQuery(frm).submit();grecaptcha.reset(holderId);return;}
+					 HTMLFormElement.prototype.submit.call(frm);
+                },
+                'expired-callback' : function(){grecaptcha.reset(holderId);}
+            });
+
+			if(null !== cf7SubmitElm && (typeof jQuery != 'undefined') ){
+				jQuery(cf7SubmitElm).off('click').on('click', function(clickEvt){
+					clickEvt.preventDefault();
+					grecaptcha.execute(holderId);
+				});
+			}
+			else
+			{
+				frm.onsubmit = function (evt){evt.preventDefault();grecaptcha.execute(holderId);};
+			}
+
+
+        })(form);
+    }
+};
+
+//# sourceURL=google-invisible-recaptcha-js-before
+/* ]]> */
+</script>
+<script type="text/javascript" async defer src="https://www.google.com/recaptcha/api.js?onload=renderInvisibleReCaptcha&amp;render=explicit" id="google-invisible-recaptcha-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/jquery.easing.1.3.js" id="jquery-easing-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/bootstrap.min.js" id="bootstrap-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/jquery.scrollTo.min.js" id="jquery-scrollTo-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/jquery.localScroll.min.js" id="jquery-localScroll-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/jquery.viewport.mini.js" id="jquery-viewport-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/jquery.sticky.js" id="jquery-sticky-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/jquery.parallax-1.1.3.js" id="jquery-parallax-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/wow.min.js" id="wow-js"></script>
+<script type="text/javascript" id="all-js-extra">
+/* <![CDATA[ */
+var get = {"ajaxurl":"/wp-admin/admin-ajax.php","siteurl":"/wp-content/themes/rhythm"};
+//# sourceURL=all-js-extra
+/* ]]> */
+</script>
+<script type="text/javascript" src="/wp-content/themes/rhythm/js/all.js" id="all-js"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js"}}
+</script>
+<script type="module">
+/* <![CDATA[ */
+/*! This file is auto-generated */
+const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+/* ]]> */
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+/*
+Theme Name: Rhythm
+*/
+
+
+body {
+	direction: rtl;
+	unicode-bidi: embed;
+}

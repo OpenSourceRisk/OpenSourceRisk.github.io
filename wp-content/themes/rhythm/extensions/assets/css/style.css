@@ -1,0 +1,70 @@
+/**
+ * Insert icon popup styles
+ */
+.insert-icon-form .select2-container {
+	width: 100%;
+	
+}
+
+.insert-icon-form .select2-container:before, .select2-result:before {
+	display: none !important;
+}
+
+.insert-icon-form .select2-container, .select2-result {
+	font-family: sans-serif !important;
+}
+
+.insert-icon-form .insert-icon-field {
+	margin: 15px 0;
+}
+
+/**
+ * Appearance>Menus styles 
+ */
+.edit-menu-preview-icon {
+	float: left;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #DFDFDF;
+	margin-right: 10px;
+	text-align: center;
+	border-radius: 3px;
+	line-height: 28px;
+}
+
+.menu-item-depth-1 .mega-menu-container,
+.menu-item-depth-2 .mega-menu-container, 
+.menu-item-depth-3 .mega-menu-container, 
+.menu-item-depth-4 .mega-menu-container,
+.menu-item-depth-5 .mega-menu-container {
+	display: none;
+}
+
+.menu-item-depth-1 .hide-navigation-label-container,
+.menu-item-depth-2 .hide-navigation-label-container, 
+.menu-item-depth-3 .hide-navigation-label-container, 
+.menu-item-depth-4 .hide-navigation-label-container,
+.menu-item-depth-5 .hide-navigation-label-container {
+	display: none;
+}
+ 
+.menu-item-depth-3 .icon-menu-container, 
+.menu-item-depth-4 .icon-menu-container,
+.menu-item-depth-5 .icon-menu-container {
+	display: none;
+}
+
+/* WP-admin Styles */
+.wp-admin .form-table td fieldset label{
+	line-height: 26px;
+}
+
+/* */
+#import-sample-data-log {
+	width: 60%;
+	height: 130px;
+	border: 1px solid #DDD;
+	margin: 10px 0;
+	padding: 5px;
+	overflow: scroll;
+}

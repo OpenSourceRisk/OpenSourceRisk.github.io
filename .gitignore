@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Original export (source, not needed in the deployed repo)
+old-site-export/
