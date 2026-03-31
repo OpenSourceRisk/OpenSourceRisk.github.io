@@ -1,0 +1,52 @@
+/*
+ * js_composer_shim.css
+ *
+ * Lightweight replacement for WPBakery Page Builder (js_composer.min.css).
+ * The original plugin (488KB) is omitted for license reasons. Pages already
+ * use Bootstrap grid classes (row, col-md-*) alongside WPBakery classes, so
+ * this shim only needs to handle the few WPBakery-specific rules.
+ */
+
+/* Row container — acts as flexbox wrapper (Bootstrap's .row already covers most of this) */
+.vc_row-fluid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+/* Column wrappers */
+.wpb_column,
+.vc_column_inner {
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+/* Content element wrapper — block display, clear floats */
+.wpb_content_element {
+  display: block;
+  margin-bottom: 20px;
+}
+.wpb_content_element:last-child {
+  margin-bottom: 0;
+}
+
+/* Raw HTML / code blocks */
+.wpb_raw_html,
+.wpb_raw_code {
+  display: block;
+}
+
+/* Clearfix for legacy float-based layouts */
+.vc_row-fluid::after,
+.wpb_column::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Animate-when-visible helper (referenced in noscript fallback) */
+.wpb_animate_when_almost_visible {
+  opacity: 1;
+}
