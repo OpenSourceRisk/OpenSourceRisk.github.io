@@ -22,6 +22,27 @@ Point `www.opensourcerisk.org` to GitHub Pages by updating your DNS records:
 
 Once DNS has propagated and the site is confirmed live, decommission the old WordPress server.
 
+## Testing locally
+
+The site is plain static HTML — just serve the repo root with any local HTTP server. **Do not open `index.html` directly in a browser** (file:// breaks root-relative links like `/wp-content/...`).
+
+**Option 1 — Python (no install needed):**
+```bash
+python3 -m http.server 8000
+```
+
+**Option 2 — Node.js (`npx`, no install needed):**
+```bash
+npx serve .
+```
+
+**Option 3 — Ruby (if you have it):**
+```bash
+ruby -run -e httpd . -p 8000
+```
+
+Then open [http://localhost:8000](http://localhost:8000) in your browser.
+
 ---
 
 ## TODO
