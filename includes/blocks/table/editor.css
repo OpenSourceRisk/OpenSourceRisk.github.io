@@ -18,9 +18,9 @@
   padding:.5em;
 }
 .wp-block-table td.is-selected,.wp-block-table th.is-selected{
-  border-color:var(--wp-admin-theme-color);
+  border-color:var(--ore-admin-theme-color);
   border-style:double;
-  box-shadow:inset 0 0 0 1px var(--wp-admin-theme-color);
+  box-shadow:inset 0 0 0 1px var(--ore-admin-theme-color);
 }
 .wp-block-table table.has-individual-borders td,.wp-block-table table.has-individual-borders th,.wp-block-table table.has-individual-borders tr,.wp-block-table table.has-individual-borders>*{
   border:1px solid;

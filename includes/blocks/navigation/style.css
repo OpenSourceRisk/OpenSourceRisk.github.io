@@ -309,7 +309,7 @@ button.wp-block-navigation-item__content{
 }
 .wp-block-navigation__responsive-container.is-menu-open{
   overflow:auto;
-  padding:clamp(1rem, var(--wp--style--root--padding-top), 20rem) clamp(1rem, var(--wp--style--root--padding-right), 20rem) clamp(1rem, var(--wp--style--root--padding-bottom), 20rem) clamp(1rem, var(--wp--style--root--padding-left), 20rem);
+  padding:clamp(1rem, var(--ore--style--root--padding-top), 20rem) clamp(1rem, var(--ore--style--root--padding-right), 20rem) clamp(1rem, var(--ore--style--root--padding-bottom), 20rem) clamp(1rem, var(--ore--style--root--padding-left), 20rem);
   z-index:100000;
 }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content{
@@ -342,7 +342,7 @@ button.wp-block-navigation-item__content{
   gap:inherit;
 }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-container{
-  padding-top:var(--wp--style--block-gap, 2em);
+  padding-top:var(--ore--style--block-gap, 2em);
 }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation-item__content{
   padding:0;
@@ -439,7 +439,7 @@ button.wp-block-navigation-item__content{
 .has-modal-open .wp-block-navigation__responsive-close{
   margin-left:auto;
   margin-right:auto;
-  max-width:var(--wp--style--global--wide-size, 100%);
+  max-width:var(--ore--style--global--wide-size, 100%);
 }
 .wp-block-navigation__responsive-close:focus{
   outline:none;

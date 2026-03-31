@@ -12,7 +12,7 @@
   letter-spacing:inherit;
   line-height:inherit;
   overflow:hidden;
-  padding:var(--wp--preset--spacing--20, 1em) 0;
+  padding:var(--ore--preset--spacing--20, 1em) 0;
   text-align:inherit;
   text-decoration:inherit;
   text-transform:inherit;

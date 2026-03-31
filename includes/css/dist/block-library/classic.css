@@ -29,7 +29,7 @@
   border:none;
   box-shadow:none;
   color:inherit;
-  padding:var(--wp--preset--spacing--20, 1em) 0;
+  padding:var(--ore--preset--spacing--20, 1em) 0;
   text-decoration:none;
 }
 .wp-block-accordion-heading__toggle:focus-visible{

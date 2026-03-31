@@ -30,7 +30,7 @@
   outline:none;
 }
 .wp-block-freeform.block-library-rich-text__tinymce a{
-  color:var(--wp-admin-theme-color);
+  color:var(--ore-admin-theme-color);
 }
 .wp-block-freeform.block-library-rich-text__tinymce:focus a[data-mce-selected]{
   background:#e5f5fa;

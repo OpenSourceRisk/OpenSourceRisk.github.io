@@ -1,7 +1,7 @@
 :where(.wp-block-term-description){
   box-sizing:border-box;
-  margin-bottom:var(--wp--style--block-gap);
-  margin-top:var(--wp--style--block-gap);
+  margin-bottom:var(--ore--style--block-gap);
+  margin-top:var(--ore--style--block-gap);
 }
 
 .wp-block-term-description p{

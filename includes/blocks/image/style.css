@@ -162,14 +162,14 @@
   border:none;
 }
 .wp-lightbox-overlay .lightbox-image-container{
-  height:var(--wp--lightbox-container-height);
+  height:var(--ore--lightbox-container-height);
   left:50%;
   overflow:hidden;
   position:absolute;
   top:50%;
   transform:translate(-50%, -50%);
   transform-origin:top left;
-  width:var(--wp--lightbox-container-width);
+  width:var(--ore--lightbox-container-width);
   z-index:9999999999;
 }
 .wp-lightbox-overlay .wp-block-image{
@@ -185,10 +185,10 @@
   z-index:3000000;
 }
 .wp-lightbox-overlay .wp-block-image img{
-  height:var(--wp--lightbox-image-height);
-  min-height:var(--wp--lightbox-image-height);
-  min-width:var(--wp--lightbox-image-width);
-  width:var(--wp--lightbox-image-width);
+  height:var(--ore--lightbox-image-height);
+  min-height:var(--ore--lightbox-image-height);
+  min-width:var(--ore--lightbox-image-width);
+  width:var(--ore--lightbox-image-width);
 }
 .wp-lightbox-overlay .wp-block-image figcaption{
   display:none;
@@ -284,7 +284,7 @@
 }
 @keyframes lightbox-zoom-in{
   0%{
-    transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)), calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale));
+    transform:translate(calc((-100vw + var(--ore--lightbox-scrollbar-width))/2 + var(--ore--lightbox-initial-left-position)), calc(-50vh + var(--ore--lightbox-initial-top-position))) scale(var(--ore--lightbox-scale));
   }
   to{
     transform:translate(-50%, -50%) scale(1);
@@ -299,7 +299,7 @@
     visibility:visible;
   }
   to{
-    transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)), calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale));
+    transform:translate(calc((-100vw + var(--ore--lightbox-scrollbar-width))/2 + var(--ore--lightbox-initial-left-position)), calc(-50vh + var(--ore--lightbox-initial-top-position))) scale(var(--ore--lightbox-scale));
     visibility:hidden;
   }
 }
