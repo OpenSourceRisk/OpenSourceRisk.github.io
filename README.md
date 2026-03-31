@@ -56,13 +56,21 @@ Then open [http://localhost:3000](http://localhost:3000) (npx serve) or [http://
 ---
 
 ### Push to GitHub
-1. Create a new repo under [github.com/OpenSourceRisk](https://github.com/OpenSourceRisk)
-2. In the repo settings, enable **Pages → Source: GitHub Actions**
-3. Run:
-   ```bash
-   git remote add origin https://github.com/OpenSourceRisk/<repo-name>.git
-   git push -u origin main
-   ```
+
+> ⚠️ **Requires an org admin** to create the repo first — you cannot create repos under `OpenSourceRisk` without org permissions.
+
+**Step 1 — Ask an `OpenSourceRisk` org admin to:**
+- Create a new **public** repository named `opensourcerisk.org` (or `website`) — leave it **empty** (no README, .gitignore, or license)
+- In the repo's **Settings → Pages**, set Source to **"GitHub Actions"**
+- Grant you **Write** or **Admin** access
+
+**Step 2 — Once the empty repo exists, push:**
+```bash
+git remote add origin https://github.com/OpenSourceRisk/<repo-name>.git
+git push -u origin main
+```
+
+GitHub Actions will deploy the site automatically on the first push.
 
 ### DNS cutover and old server shutdown
 - Update DNS A records (see table above) to point `www.opensourcerisk.org` to GitHub Pages
