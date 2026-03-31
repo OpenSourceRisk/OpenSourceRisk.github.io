@@ -1,5 +1,7 @@
 var filtering_running = false;
 var wpforms_search_running = 'No';
+// WordPress normally sets ajaxurl as a global; on the static site it lives in get.ajaxurl
+var ajaxurl = (typeof get !== 'undefined' && get.ajaxurl) ? get.ajaxurl : '';
 
 var ajax_ctrlr = {
 
