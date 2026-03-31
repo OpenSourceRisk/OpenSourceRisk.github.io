@@ -248,8 +248,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     </div>
 
   </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
   <div class="swiper-pagination"></div>
 </div>
 <!-- Swiper JS (replaces Revolution Slider) -->
@@ -292,7 +290,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   transition:background .2s,color .2s;
 }
 .ore-slide-btn:hover { background:#fff; color:#000 !important; }
-.swiper-button-next,.swiper-button-prev { color:#fff; }
 .swiper-pagination-bullet-active { background:#fff; }
 @media(max-width:768px){
   .ore-slide-content { margin-left:20px; margin-right:20px; }
@@ -301,9 +298,9 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 }
 </style>
 <script>
-new Swiper('.ore-hero-slider',{loop:true,autoplay:{delay:6000,disableOnInteraction:false},
+new Swiper('.ore-hero-slider',{loop:true,autoplay:{delay:7000,disableOnInteraction:false},
+  speed:1800,
   effect:'fade',fadeEffect:{crossFade:true},
-  navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},
   pagination:{el:'.swiper-pagination',clickable:true}});
 </script>
 			<!-- END REVOLUTION SLIDER -->
