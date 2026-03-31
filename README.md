@@ -24,24 +24,26 @@ Once DNS has propagated and the site is confirmed live, decommission the old Wor
 
 ## Testing locally
 
-The site is plain static HTML — just serve the repo root with any local HTTP server. **Do not open `index.html` directly in a browser** (file:// breaks root-relative links like `/wp-content/...`).
+The site is plain static HTML — just serve the repo root with any local HTTP server. **Do not open `index.html` directly in a browser** (file:// breaks root-relative links like `/content/...`).
 
-**Option 1 — Python (no install needed):**
-```bash
-python3 -m http.server 8000
-```
-
-**Option 2 — Node.js (`npx`, no install needed):**
+**Option 1 — Node.js `npx serve` (recommended):**
 ```bash
 npx serve .
 ```
+> ✅ Automatically serves `404.html` for broken links, matching GitHub Pages behaviour exactly.
+
+**Option 2 — Python (no install needed):**
+```bash
+python3 -m http.server 8000
+```
+> ⚠️ Does **not** serve `404.html` for missing paths — Python shows its own built-in error. Use `npx serve` to test 404 handling locally.
 
 **Option 3 — Ruby (if you have it):**
 ```bash
 ruby -run -e httpd . -p 8000
 ```
 
-Then open [http://localhost:8000](http://localhost:8000) in your browser.
+Then open [http://localhost:3000](http://localhost:3000) (npx serve) or [http://localhost:8000](http://localhost:8000) (Python/Ruby) in your browser.
 
 ---
 
