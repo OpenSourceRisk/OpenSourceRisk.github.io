@@ -256,7 +256,24 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <style>
-.ore-hero-slider { width:100%; height:650px; max-height:65vh; }
+.ore-hero-slider {
+  /* Break out of Bootstrap container to full viewport width */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 650px;
+  max-height: 65vh;
+  /* Prevent scrollbar on overflow during transition */
+  overflow: hidden;
+}
+/* Remove gutters from the row/column wrapping the slider */
+.wpb_revslider_element.wpb_content_element {
+  margin-bottom: 0 !important;
+}
+.wpb_revslider_element > p.rs-p-wp-fix {
+  display: none;
+}
 .ore-hero-slider .swiper-slide {
   background-size:cover; background-position:center; background-repeat:no-repeat;
   position:relative; display:flex; align-items:center;
