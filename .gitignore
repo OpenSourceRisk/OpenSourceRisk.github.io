@@ -3,3 +3,10 @@
 
 # Original export (source, not needed in the deployed repo)
 old-site-export/
+
+# Large video files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
