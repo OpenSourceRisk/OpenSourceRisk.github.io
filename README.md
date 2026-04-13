@@ -34,7 +34,7 @@ npx serve .
 
 **Option 2 — Python (no install needed):**
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000 
 ```
 > ⚠️ Does **not** serve `404.html` for missing paths — Python shows its own built-in error. Use `npx serve` to test 404 handling locally.
 
