@@ -184,9 +184,6 @@
 		<section class="content-section full-width with-col cover no-padding no-margin content-section-69cb8b9da22e9"><div class="row vc_row-fluid"><div class="wpb_column col-md-12"><h3 class="banner-heading font-alt mb-30 mb-xxs-10">Future Releases</h3><div class="section-text text-block "><table width="624">
 <tbody>
 <tr>
-<td width="248">· <a href="#futurereleases">Future Release</a></td>
-</tr>
-<tr>
 <td width="248">· <a href="#v16">Version 16 – New Features (April 2026)</a></td>
 </tr>
 <tr>
@@ -201,67 +198,6 @@
 </tbody>
 </table>
 <hr>
-</div><h3 id="futurereleases" class="banner-heading font-alt mb-30 mb-xxs-10">Future Releases</h3><div class="section-text text-block "><hr>
-<p>Below is the foreseeable roadmap of further Acadia contributions to ORE in the second half of 2026 and in 2027:</p>
-<h3>Regulatory capital</h3>
-<ul>
-<li>Market Risk Capital (FRTB-SA)</li>
-<li>Credit Risk Capital (SA-CCR, BA-CVA, SA-CVA) for all products</li>
-<li>SA-CCR refactoring, aligned to ISDA’s Capital CRIF</li>
-</ul>
-<h3>Performance</h3>
-<ul>
-<li>Development of XVA Sensitivity Analysis using AAD continues, which is demonstrated in proof-of-concept stage in ORE example 56</li>
-<li>The GPU interface implementation will be extended to cover exposure simulations</li>
-<li>A GPU interface implementation in CUDA will follow with benchmarking examples vs the OpenCL implementation that is available in release 12</li>
-</ul>
-<h3>Pricing &amp; Simulation</h3>
-<ul>
-<li>The Heston model will be exposed in ORE for pricing of equity derivatives</li>
-<li>The Multi-factor Cross Asset Model based on n-factor Hull-White will be extended beyond its current coverage of IR, FX, COM asset classes, also adding calibration procedures</li>
-<li>Stochastic volatility</li>
-<li>Hardened Dynamic SIMM</li>
-<li>Quadratic Gaussian model</li>
-<li>Multi-factor commodity model</li>
-<li>Global rate curve building (global for the instruments in one curve and for several curves that are mutually dependent</li>
-<li>Stressed Cashflows/CfaR</li>
-</ul>
-<h3>Instruments</h3>
-<ul>
-<li>Callable and puttable bonds support (including bond derivatives)</li>
-</ul>
-<h3>User Interfaces &amp; Tools</h3>
-<ul>
-<li>Extension of the open-source-risk-engine scope to cover more of ORE’s classes and member functions. This will be done tactically as we see concrete demand from clients</li>
-</ul>
-<p>See some examples here (<a href="https://github.com/OpenSourceRisk/ORE-SWIG/tree/master/OREAnalytics-SWIG/Python/Examples">https://github.com/OpenSourceRisk/ORE-SWIG/tree/master/OREAnalytics-SWIG/Python/Examples</a>)</p>
-<ul>
-<li>exploRE (AI documentation assistant)</li>
-<li>ORE Dashboard/GUI</li>
-<li>OREDiscovery (market data dependency tool and configuration building)</li>
-<li>Creation of an ORE interface in Excel</li>
-</ul>
-<h3>ORE Academy</h3>
-<p>The following 3 topics are currently being produced, and these videos will be released in the coming months. They will all come with an Excel spreadsheet replicating what is happening in our C++ library, while also explaining how to configure the relevant XML files:</p>
-<ul>
-<li>Equity Option Valuation &amp; Calibration:
-<ul>
-<li>Part 4 – Equity Volatility Calibration</li>
-<li>Part 5 – Root-Finding Algorithm Explanation</li>
-</ul>
-</li>
-<li>Sensitivity Calculation</li>
-<li>Parametric VaR</li>
-</ul>
-<p>We will also release some tutorials showing how to use our ORE Python library in some Jupiter Notebooks, with similar topics:</p>
-<ul>
-<li>ORE Python – Equity Option Valuation</li>
-<li>ORE Python – OIS Discounting Curve Bootstrapping</li>
-</ul>
-<p>An update of the installation video in Windows is also planned, along with one on schedule creation.</p>
-<p>See the YouTube channel here (<a href="https://www.youtube.com/@oreacademy">https://www.youtube.com/@oreacademy</a>)</p>
-<hr>
-</div>
 <h3 id="v16" class="banner-heading font-alt mb-30 mb-xxs-10">Version 16 - New Features</h3><div class="section-text text-block "><hr>
 <h3>Instruments & Pricing Engines</h3>
 <ul>
@@ -399,6 +335,7 @@
 <h3>Analytics</h3>
 <ul>
 <li>Stressed Cashflows</li>
+<li>Dynamic SIMM Model – POC</li>
 <li>Decorrelated Backtesting</li>
 <li>Cross Asset Model Calibration Export/Import</li>
 <li>Portfolio Details</li>
@@ -419,17 +356,6 @@
 <li>Expose indicator smoothing parameters</li>
 </ul>
 </li>
-</ul>
-<h3>Dynamic SIMM Model – POC</h3>
-<ul>
-<li>Systematic deviations to be ironed out, see below</li>
-<li>Sensitivity regression is more sensitive than NPV regression
-<ul>
-<li>IM distributions close to today seem to need regularized parametric regression</li>
-<li>IM distribution close to option expiry need local regression to match the true distribution</li>
-</ul>
-</li>
-<li>Optimal regression choice to be determined</li>
 </ul>
 <h3>ORE Academy</h3>
 <p>Release of the ‘Equity Option Valuation &amp; Calibration Masterclass’ series:</p>
