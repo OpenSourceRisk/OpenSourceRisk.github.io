@@ -184,78 +184,112 @@
 		<section class="content-section full-width with-col cover no-padding no-margin content-section-69cb8b9da22e9"><div class="row vc_row-fluid"><div class="wpb_column col-md-12"><h3 class="banner-heading font-alt mb-30 mb-xxs-10">Future Releases</h3><div class="section-text text-block "><table width="624">
 <tbody>
 <tr>
-<td width="248">· <a href="#futurereleases">Future Release</a></td>
+<td width="248">· <a href="#v16">Version 16 – New Features (April 2026)</a></td>
+</tr>
+<tr>
+<td width="248">· <a href="#v15">Version 15 – New Features (January 2026)</a></td>
+</tr>
+<tr>
+<td width="248">· <a href="#v14">Version 14 – New Features (October 2025)</a></td>
 </tr>
 <tr>
 <td width="248">· <a href="#v13">Version 13 – New Features (May 2025)</a></td>
 </tr>
-<tr>
-<td width="248">· <a href="#v12">Version 12 – New Features (October 2024)</a></td>
-</tr>
 </tbody>
 </table>
 <hr>
-</div><h3 id="futurereleases" class="banner-heading font-alt mb-30 mb-xxs-10">Future Releases</h3><div class="section-text text-block "><hr>
-<p>Below is the foreseeable roadmap of further Acadia contributions to ORE in the second half of 2025 and in 2026:</p>
-<h3>Regulatory capital</h3>
+<h3 id="v16" class="banner-heading font-alt mb-30 mb-xxs-10">Version 16 - New Features</h3><div class="section-text text-block "><hr>
+<h3>Instruments & Pricing Engines</h3>
 <ul>
-<li>Market Risk Capital (FRTB-SA)</li>
-<li>Credit Risk Capital (SA-CCR, BA-CVA, SA-CVA) for all products</li>
-<li>SA-CCR refactoring, aligned to ISDA’s Capital CRIF</li>
+	<li>Support cross-currency Flexi-Swap</li>
+	<li>Support swaption straddles</li>
+	<li>Support Dual European Binary Option with Volatility</li>
+	<li>Cross-currency support for Commodity Swaps</li>
+	<li>Add rate digital option instrument and pricer</li>
+	<li>Add range accrual instrument and pricer</li>
+	<li>Include conditional fee paid on exercise for swaption pricing</li>
+	<li>Support quoted commodity calendar spread options</li>
+	<li>Update single name CDS options to current conventions</li>
+	<li>Support rebasing of inflation indices</li>
+</ul>
+<h3>Pricing & Simulation</h3>
+<ul>
+	<li>Heston model for scripted trade pricing</li>
+	<li>SVI for equity, fx, commodity, credit volatility surfaces</li>
+	<li>Convexity adjustment for EquityTRS and BondTRS</li>
+	<li>Review of inflation simulation framework</li>
+	<li>LocalVol support for FX in exposure simulations</li>
+	<li>Optionally use effective volatilites in market cap surfaces</li>
+</ul>
+<h3>Analytics</h3>
+<ul>
+	<li>Optional trade and risk factor breakdown in HistSimVar analytic</li>
+	<li>Generate Theta in Sensitivity Analytic </li>
 </ul>
 <h3>Performance</h3>
 <ul>
-<li>Development of XVA Sensitivity Analysis using AAD continues, which is demonstrated in proof-of-concept stage in ORE example 56</li>
-<li>The GPU interface implementation will be extended to cover exposure simulations</li>
-<li>A GPU interface implementation in CUDA will follow with benchmarking examples vs the OpenCL implementation that is available in release 12</li>
+	<li>Support multithreading in HistSimVar analytic</li>
+	<li>Speed up of cube reading and writing</li>
+	<li>Speed up of MC exposure simulation, scenario generation, fast fx forward, and vanilla swap engines</li>
 </ul>
-<h3>Pricing &amp; Simulation</h3>
+<h3>Consolidation with QuantLib</h3>
+<ul><li>ORE v16 uses QuantLib v1.42, released April 2026</li></ul>
+<br>
+</div>
+<h3 id="v15" class="banner-heading font-alt mb-30 mb-xxs-10">Version 15 - New Features</h3><div class="section-text text-block "><hr>
+<h3>Pricing & Simulation</h3>
 <ul>
-<li>The Heston model will be exposed in ORE for pricing of equity derivatives</li>
-<li>The Multi-factor Cross Asset Model based on n-factor Hull-White will be extended beyond its current coverage of IR, FX, COM asset classes, also adding calibration procedures</li>
-<li>Stochastic volatility</li>
-<li>Hardened Dynamic SIMM</li>
-<li>Quadratic Gaussian model</li>
-<li>Multi-factor commodity model</li>
-<li>Global rate curve building (global for the instruments in one curve and for several curves that are mutually dependent</li>
-<li>Stressed Cashflows/CfaR</li>
-</ul>
-<h3>Instruments</h3>
+	<li>American Monte Carlo (AMC) model support for GenericBarrierOptions, FXDigitalOptions, FXEuropeanBarrierOptions, FXDoubleBarrierOptions, FXBarrierOptions, and FXKIKOBarrierOptions</li>
+	<li>Flat-forward interpolation for commodity price curves</li>
+	<li>Hull White n-Factor model calibration to historical rate curve moves</li>
+	<li>Exposure cube NPV overlay</li>
+</ul>	
+<h3>Instruments & Pricing Engines</h3>
 <ul>
-<li>Callable and puttable bonds support (including bond derivatives)</li>
+	<li>Support subtrades for composite trades</li>
+	<li>Volatility smile outputs in additional results for variance swap replication engines</li>
+	<li>Rate curve cashflow report containing the cashflows of rate curve instruments</li>
+	<li>Constituent calibration to index level for index CDS options</li>
+	<li>Configurable usage of indexed and par IBOR coupons respectively for curve building and trade pricing</li>
+	<li>Support for conventional spreads in credit curve builder</li>
+	<li>Start delay for inflation rate helpers</li>
+	<li>New pillar choices (StartDate, StartAndEndDate, None) in rate curve configuration</li>
+	<li>Penalty for curve smoothness in global rate curve builder</li>
 </ul>
-<h3>User Interfaces &amp; Tools</h3>
+<h3>Analytics</h3>
 <ul>
-<li>Extension of the open-source-risk-engine scope to cover more of ORE’s classes and member functions. This will be done tactically as we see concrete demand from clients</li>
+	<li>Sticky SABR sensitivity calculations</li>
 </ul>
-<p>See some examples here (<a href="https://github.com/OpenSourceRisk/ORE-SWIG/tree/master/OREAnalytics-SWIG/Python/Examples">https://github.com/OpenSourceRisk/ORE-SWIG/tree/master/OREAnalytics-SWIG/Python/Examples</a>)</p>
-<ul>
-<li>exploRE (AI documentation assistant)</li>
-<li>ORE Dashboard/GUI</li>
-<li>OREDiscovery (market data dependency tool and configuration building)</li>
-<li>Creation of an ORE interface in Excel</li>
-</ul>
+<h3>Consolidation with QuantLib</h3>
+<ul><li>ORE v15 uses QuantLib v1.41, released January 2026</li></ul>
 <h3>ORE Academy</h3>
-<p>The following 3 topics are currently being produced, and these videos will be released in the coming months. They will all come with an Excel spreadsheet replicating what is happening in our C++ library, while also explaining how to configure the relevant XML files:</p>
+
+</div>
+<h3 id="v14" class="banner-heading font-alt mb-30 mb-xxs-10">Version 14 - New Features</h3><div class="section-text text-block"><hr>
+<h3>Pricing & Simulation</h3>
 <ul>
-<li>Equity Option Valuation &amp; Calibration:
+	<li>Introduce refined regression models for overnight coupons in AMC simulation</li>
+	<li>Refined calibration for Swaptions, using the delta-gamma adjusted basket approach</li>
+	<li>Global rate curve bootstrapping: Rate curve bootstrapping can use a global optimizer, both within one curve and for a set of mutually dependent curves</li>
+	<li>Rounding for commodity floating leg</li>
+</ul>
+<h3>Analytics</h3>
 <ul>
-<li>Part 4 – Equity Volatility Calibration</li>
-<li>Part 5 – Root-Finding Algorithm Explanation</li>
+	<li>Correlation Analytic and Correlation (optional) dependency for XVA</li>
 </ul>
-</li>
-<li>Sensitivity Calculation</li>
-<li>Parametric VaR</li>
-</ul>
-<p>We will also release some tutorials showing how to use our ORE Python library in some Jupiter Notebooks, with similar topics:</p>
+<h3>Instruments & Pricing Engines</h3>
 <ul>
-<li>ORE Python – Equity Option Valuation</li>
-<li>ORE Python – OIS Discounting Curve Bootstrapping</li>
+	<li>Support finite-difference based pricing of american options on commodity future underlyings</li>
+	<li>Support finite-difference based pricing of callable bonds and bond derivatives on callable bond underlyings, Forward, TRS, Options</li>
+	<li>Support for bond futures with Cheapest To Deliver feature and TRS ond Bond Futures</li>
 </ul>
-<p>An update of the installation video in Windows is also planned, along with one on schedule creation.</p>
-<p>See the YouTube channel here (<a href="https://www.youtube.com/@oreacademy">https://www.youtube.com/@oreacademy</a>)</p>
-<hr>
-</div><h3 id="v13" class="banner-heading font-alt mb-30 mb-xxs-10">Version 13 - New Features</h3><div class="section-text text-block "><hr>
+<h3>Performance</h3>
+<ul><li>Missing Fixing ID errors are now always attributed to trade ids</li></ul>
+<h3>Consolidation with QuantLib</h3>
+<ul><li>ORE v14 uses QuantLib v1.40, released October 2025</li></ul>
+<br>
+</div>
+<h3 id="v13" class="banner-heading font-alt mb-30 mb-xxs-10">Version 13 - New Features</h3><div class="section-text text-block "><hr>
 <h3>Examples</h3>
 <p>80+ use cases, reorganized into:</p>
 <ul>
@@ -282,9 +316,12 @@
 <li>Design</li>
 </ul>
 <h3>ORE Python</h3>
-<p>Code base moved into the ORE repository, including Jupyter notebook examples</p>
+<ul>
+	<li>Code base moved into the ORE repository, including Jupyter notebook examples</li>
+	<li>Extensions to facilitate ORE integration at a major client to replace a production PFE system</li>
+</ul>
 <h3>Consolidation with QuantLib</h3>
-<p>ORE v13 uses QuantLib v1.38, released end of April 2025</p>
+<ul><li>ORE v13 uses QuantLib v1.38, released end of April 2025</li></ul>
 <h3>Instruments &amp; Pricing Engines</h3>
 <ul>
 <li>Swaption extensions (mid-coupon exercise)</li>
@@ -295,11 +332,10 @@
 <li>SABR model calibration</li>
 <li>FX vol surface improvements (stabilized calibration, weighted interpolation)</li>
 </ul>
-<h3>ORE Python</h3>
-<p>Extensions to facilitate ORE integration at a major client to replace a production PFE system</p>
 <h3>Analytics</h3>
 <ul>
 <li>Stressed Cashflows</li>
+<li>Dynamic SIMM Model – POC</li>
 <li>Decorrelated Backtesting</li>
 <li>Cross Asset Model Calibration Export/Import</li>
 <li>Portfolio Details</li>
@@ -320,17 +356,6 @@
 <li>Expose indicator smoothing parameters</li>
 </ul>
 </li>
-</ul>
-<h3>Dynamic SIMM Model – POC</h3>
-<ul>
-<li>Systematic deviations to be ironed out, see below</li>
-<li>Sensitivity regression is more sensitive than NPV regression
-<ul>
-<li>IM distributions close to today seem to need regularized parametric regression</li>
-<li>IM distribution close to option expiry need local regression to match the true distribution</li>
-</ul>
-</li>
-<li>Optimal regression choice to be determined</li>
 </ul>
 <h3>ORE Academy</h3>
 <p>Release of the ‘Equity Option Valuation &amp; Calibration Masterclass’ series:</p>
@@ -359,63 +384,7 @@
 <hr>
 		</div>
 	</div>
-<h3 id="v12" class="banner-heading font-alt mb-30 mb-xxs-10">Version 12 New Features</h3><div class="section-text text-block "><hr>
-<p>The rollout of formerly proprietary code (Post Trade Solutions (formerly Acadia)’s ORE+) continues, but new development has overtaken the latter, notably regarding the extension of instruments, pricing engines, analytics, performance, integration and the ORE Academy.</p>
-<p><strong>Instruments &amp; Pricing Engines</strong></p>
-<ul>
-<li>Formula-based leg (see Example 64)</li>
-<li>Callable Swap (see extended Example 5)</li>
-<li>Flexi Swap and Balance Guaranteed Swap (see Examples 65 and 66)</li>
-<li>Outperformance Option, Pairwise Variance Swap</li>
-<li>American Swaption with finite difference pricing in LGM (see extended Example 4)</li>
-<li>Finite difference LGM pricers for Bermudan and European Swaptions</li>
-<li>Scripted Trade pricing using LGM with finite difference and numerical integration</li>
-<li>Improved AMC regression model for Resetting Cross Currency Swaps</li>
-<li>Yield curve building with mixed interpolations (see Example 53)</li>
-<li>SABR pricing for Swaptions and Caps/Floor (see Example 59)</li>
-<li>Analytic pricer for Overnight Index Swaptions</li>
-<li>Numerical integration LGM pricer for European Swaptions</li>
-<li>Burley 2020 scrambled Sobol sequence for faster convergence (see Example 56)</li>
-<li>Separate notional payment lags for Resetting Cross Currency Swaps</li>
-<li>Support for indexed cashflows in American Monte Carlo</li>
-<li>Rules-based Bermudan exercise dates</li>
-</ul>
-<p><strong>Analytics</strong></p>
-<ul>
-<li>IM Schedule analytic (see extended Example 44)</li>
-<li>Scenario analytic (see Example 57)</li>
-<li>Bond spread imply</li>
-<li>Support overlapping close-out date grid in exposure/XVA (see Example 60)</li>
-<li>Market risk backtest analytic, calculation of traffic-light bounds</li>
-<li>Historical simulation VaR analytic (see Example 58)</li>
-<li>P&amp;L and P&amp;L Explain analytics (see Example 62)</li>
-<li>Stress test in the par rate domain (see Example 63)</li>
-<li>XVA Stress testing (see Example 67)</li>
-</ul>
-<p><strong> SIMM </strong></p>
-<ul>
-<li>SIMM 2.7 Calculation from CRIF Files</li>
-</ul>
-<p><strong>Performance</strong></p>
-<p>The Scripted Trade framework serves as ORE’s Adjoint Automatic Differentiation (AAD) backbone and interface to external compute devices (GPUs):</p>
-<ul>
-<li>AAD is used case by case, where appropriate, to accelerate sensitivity analysis in Post Trade Solutions (formerly Acadia) Risk Services</li>
-<li>Near term goal is utilizing GPUs to enhance the performance of backtesting, sensitivity analysis (CRIF generation) and exposure simulation in the Post Trade Solutions (formerly Acadia) Risk Services</li>
-</ul>
-<p><em>Related new examples</em>:</p>
-<ul>
-<li>XVA Sensitivity using AAD, see Example 56</li>
-<li>Fast Sensitivities using AAD and GPUs, see Example 61</li>
-</ul>
-<p><strong>Integration</strong></p>
-<p>In the Post Trade Solutions (formerly Acadia) Risk Services we run ORE wrapped into a Web Service framework, deployed via Docker on multiple nodes for industrial scale (“RESTORE”, still part of Post Trade Solutions (formerly Acadia)’s proprietary ORE+)</p>
-<p>In release 12 we have contributed a similar – proof-of-concept – web service version of ORE based on the ORE Python module and the Flask web framework.</p>
-<p><em>Related new example</em><u>:</u></p>
-<ul>
-<li>Examples/API, see user guide section 5.0</li>
-</ul>
-<hr>
-</div><div class="clear rs-space" style="height:32px;"></div></div></div></section><section class="content-section full-width with-col cover no-padding no-margin content-section-69cb8b9da45ba"><div class="row vc_row-fluid"><div class="wpb_column col-md-12"></div></div></section>
+<div class="clear rs-space" style="height:32px;"></div></div></div></section><section class="content-section full-width with-col cover no-padding no-margin content-section-69cb8b9da45ba"><div class="row vc_row-fluid"><div class="wpb_column col-md-12"></div></div></section>
 			</div>
 </article><!-- #post-## -->
 								</div>
