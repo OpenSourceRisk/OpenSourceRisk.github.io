@@ -184,6 +184,9 @@
 		<section class="content-section full-width with-col cover no-padding no-margin content-section-69cb8b9da22e9"><div class="row vc_row-fluid"><div class="wpb_column col-md-12"><h3 class="banner-heading font-alt mb-30 mb-xxs-10">Future Releases</h3><div class="section-text text-block "><table width="624">
 <tbody>
 <tr>
+<td width="248">· <a href="#v17">Version 17 – New Features (August 2026)</a></td>
+</tr>	
+<tr>
 <td width="248">· <a href="#v16">Version 16 – New Features (April 2026)</a></td>
 </tr>
 <tr>
@@ -198,6 +201,56 @@
 </tbody>
 </table>
 <hr>
+<h3 id="v17" class="banner-heading font-alt mb-30 mb-xxs-10">Version 17 - New Features</h3><div class="section-text text-block "><hr>
+<h4><b>Important:</b> ORE v17 contains a breaking change for rate curve building - overnight index futures are specified by their contract month, see the market data section in the user guide for details.</h4>	
+<h3>Instruments & Pricing Engines</h3>
+<ul>
+	<li>Support XVA calculations for RPA on vanilla and structured underlyings</li>
+	<li>Complete coverage of AMC for scripted trades</li>
+	<li>Add fixed strike forward volatility agreement</li>
+	<li>Add overnight compounded rate rounding</li>
+	<li>Add payment lag unit and anchor to leg data and derived schedule definitions</li>
+	<li>Add option on bond future</li>
+	<li>Add callable variant of range accrual instrument and pricer</li>
+	<li>Add call-spread based pricing for FX digital options</li>
+	<li>Add calibration to effective swaptions for RPA pricing on structured underlyings</li>
+</ul>
+<h3>Analytics</h3>
+<ul>
+	<li>Add sensitivity based histsim var</li>
+	<li>Support averaging coupons for single currency synthetic swaps in par conversion</li>
+	<li>Support multithreading in stress analytic</li>
+	<li>Add date shifts in stress scenario calculations and refactor theta calculation</li>
+	<li>Add money market and overnight IR futures in par conversion</li>
+	<li>Improve performance of regression analysis in AMC-CG framework</li>
+	<li>Add stressed SIMM analytic</li>
+	<li>Support for SIMM 2.8+2512</li>
+	<li>Support for cuda-based variant of qrSolve() for AMC training</li>
+	<li>Fix dim scaling when initial collateral balance has zero initial margin</li>
+	<li>Fix sticky moneyness sensitivity for IR Caps</li>
+	<li>Fix sticky moneyness sensitivity for commodity options</li>
+	<li>Add path-level additional results report for scripted trades</li>
+</ul>
+<h3>Market Data</h3>
+<ul>
+	<li><b>Breaking Change: </b> overnight index future market datum label to use contract month.</li>
+	<li>Support contract month codes in money market and overnight interest rate futures</li>
+	<li>Add market calibration report for default curves</li>
+	<li>Support intraday power curves</li>
+	<li>Add logCubic interpolation in scenario sim market</li>
+	<li>Update ILS calendar</li>
+</ul>
+<h3>Interface and Reports</h3>
+<ul>
+	<li>Extend SWIG coverage</li>
+	<li>Add base currency to scenario and stress test reports</li>
+	<li>Add stacktrace for exceptions (only Linux, OSX)</li>
+	<li>Add optional filter for scenario dump output file</li>
+</ul>
+<h3>Consolidation with QuantLib</h3>
+<ul><li>ORE v17 uses QuantLib v1.42.1, released April 2026</li></ul>
+<br>
+</div>
 <h3 id="v16" class="banner-heading font-alt mb-30 mb-xxs-10">Version 16 - New Features</h3><div class="section-text text-block "><hr>
 <h3>Instruments & Pricing Engines</h3>
 <ul>
